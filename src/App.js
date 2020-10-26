@@ -23,8 +23,8 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <Router>
-                    <div>
-                        <Navbar />
+                    <Navbar />
+                    <div className="container">
                         <Switch>
                             <Route path="/addevent">
                                 <AddEvent />

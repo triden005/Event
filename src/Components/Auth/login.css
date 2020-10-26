@@ -1,0 +1,45 @@
+/* Style all input fields */
+.Login {
+    margin-top: 20%;
+    height: 100%;
+    width: 40%;
+    /* background-color: #f1f1f1; */
+}
+.Login input {
+    width: 70%;
+    height: 100%;
+    padding: 12px;
+    margin-left: 3%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 30px;
+}
+
+/* Style the submit button */
+.Login input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    width: 20%;
+    border: 0px solid #ccc;
+}
+.Login input:focus {
+    outline: none;
+}
+
+/* Style the container for inputs */
+/* .Login .container {
+    background-color: #f1f1f1;
+    padding: 10px;
+} */
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display: none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}

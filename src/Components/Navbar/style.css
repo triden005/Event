@@ -1,0 +1,44 @@
+/* Style the navigation bar */
+.navbar {
+    width: 100%;
+    background-color: #20bf55;
+    background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+
+    overflow: auto;
+}
+
+/* Navbar links */
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+/* navbar with right items */
+.navbar a.right {
+    float: right;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+/* Navbar links on mouse-over */
+.navbar a:hover {
+    background-color: #4caf50;
+}
+
+/* Current/active navbar link */
+.navbar a.active {
+    background-color: #4caf50;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+/* @media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+} */
