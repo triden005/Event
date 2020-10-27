@@ -1,0 +1,64 @@
+/* Style all input fields */
+.div1-register {
+    display: flex;
+    color: white;
+    /* overflow: hidden; */
+}
+.Register {
+    height: 100%;
+    /* max-width: 500px; */
+    /* max-width: 70%; */
+    width: 400px;
+    margin-left: 3vw;
+    margin: auto;
+}
+@media screen and (max-width: 1100px) {
+    .div1-register {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .Register {
+        width: 80vw;
+    }
+    .Register.right {
+        width: 80vw;
+    }
+    .Register textarea {
+        width: 70vw;
+    }
+}
+.Register input {
+    width: 100%;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 30px;
+}
+
+/* Style the submit button */
+.Register input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    width: 30%;
+    min-width: 0px;
+    border: 0px solid #ccc;
+}
+.Register input:focus {
+    outline: none;
+}
+
+.Register.right {
+    margin-top: 100px;
+    font-style: italic;
+    font-size: larger;
+    font-family: monospace;
+    color: whitesmoke;
+    text-align: left;
+    width: 400px;
+    margin: auto;
+}

@@ -1,8 +1,8 @@
 body {
     background-color: #36096d;
     background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 .container {
     text-align: center;
@@ -14,6 +14,19 @@ body {
     .container {
         width: 100%;
     }
+}
+
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.boldtext {
+    font-weight: bold;
 }
 /* .App-logo {
   height: 40vmin;
