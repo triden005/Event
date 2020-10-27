@@ -1,9 +1,31 @@
 /* Style all input fields */
+.div1-login {
+    display: flex;
+    /* overflow: hidden; */
+}
 .Login {
-    margin-top: 20%;
     height: 100%;
+    max-width: 500px;
     width: 40%;
-    /* background-color: #f1f1f1; */
+    margin: auto;
+    margin-top: 20%;
+}
+@media screen and (max-width: 1200px) {
+    .div1-login {
+        display: block;
+    }
+    .Login {
+        width: 80%;
+    }
+    .Login.right {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Login {
+        width: 100%;
+    }
 }
 .Login input {
     width: 70%;
@@ -22,24 +44,23 @@
     background-color: #4caf50;
     color: white;
     width: 20%;
+    min-width: 0px;
     border: 0px solid #ccc;
 }
 .Login input:focus {
     outline: none;
 }
 
-/* Style the container for inputs */
-/* .Login .container {
-    background-color: #f1f1f1;
-    padding: 10px;
-} */
+.Login.right {
+    /* border: 2px solid red; */
+    font-style: italic;
+    font-size: larger;
+    font-family: monospace;
+    color: whitesmoke;
+    text-align: left;
+    padding-left: 2%;
+    /* max-width: 10000px; */
 
-/* The message box is shown when the user clicks on the password field */
-#message {
-    display: none;
-    background: #f1f1f1;
-    color: #000;
-    position: relative;
-    padding: 20px;
-    margin-top: 10px;
+    /* margin: auto; */
+    /* margin-top: 20%; */
 }
