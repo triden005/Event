@@ -9,24 +9,47 @@ class Navbar extends React.Component {
                     <Link to="/">
                         <i class="fa fa-fw fa-home" /> Home
                     </Link>
+                    <span class="tohide">
+                        <Link to="/addevent">
+                            <i class="fa fa-fw fa-plus-square" /> AddEvent
+                        </Link>
 
-                    <Link to="/addevent">
-                        <i class="fa fa-fw fa-plus-square" /> AddEvent
-                    </Link>
+                        <Link to="/eventcalander">
+                            <i class="fa fa-fw fa-calendar-plus" /> Calendar
+                        </Link>
+                        <Link to="/posters">Poster</Link>
+                    </span>
 
-                    <Link to="/eventcalander">
-                        <i class="fa fa-fw fa-calendar-plus" /> Calendar
-                    </Link>
+                    <div class="dropdown right">
+                        <button class="dropbtn">
+                            <i class="fa fa-caret-down"></i> Options
+                        </button>
+                        <div class="dropdown-content">
+                            <Link to="/addevent">
+                                <i class="fa fa-fw fa-plus-square" /> AddEvent
+                            </Link>
 
-                    <Link to="/posters">Poster</Link>
+                            <Link to="/eventcalander">
+                                <i class="fa fa-fw fa-calendar-plus" /> Calendar
+                            </Link>
+                            <Link to="/register">
+                                <i class="fa fa-fw fa-user-plus" /> Register
+                            </Link>
 
-                    <Link to="/register" className="right">
-                        <i class="fa fa-fw fa-user-plus" /> Register
-                    </Link>
+                            <Link to="/login">
+                                <i class="fa fa-fw fa-user" /> Login
+                            </Link>
+                        </div>
+                    </div>
+                    <span class="tohide">
+                        <Link to="/register" className="right">
+                            <i class="fa fa-fw fa-user-plus" /> Register
+                        </Link>
 
-                    <Link to="/login" className="right">
-                        <i class="fa fa-fw fa-user" /> Login
-                    </Link>
+                        <Link to="/login" className="right">
+                            <i class="fa fa-fw fa-user" /> Login
+                        </Link>
+                    </span>
                 </div>
             </nav>
         );

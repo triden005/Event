@@ -1,0 +1,65 @@
+/* Style all input fields */
+.div1-addevent {
+    display: flex;
+    color: white;
+    /* overflow: hidden; */
+}
+.addevent {
+    height: 100%;
+    width: 400px;
+    margin-left: 3vw;
+    margin: auto;
+}
+@media screen and (max-width: 1100px) {
+    .div1-addevent {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .addevent {
+        width: 80vw;
+    }
+    .addevent.right {
+        width: 80vw;
+    }
+    .addevent textarea {
+        width: 70vw;
+    }
+}
+.addevent input {
+    width: 100%;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 30px;
+}
+
+/* Style the submit button */
+.addevent input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    width: 30%;
+    min-width: 0px;
+    border: 0px solid #ccc;
+}
+.addevent input:focus {
+    outline: none;
+}
+
+.addevent.right {
+    font-style: italic;
+    font-size: larger;
+    font-family: monospace;
+    color: whitesmoke;
+    text-align: left;
+    width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 5px;
+}
