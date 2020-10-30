@@ -15,9 +15,14 @@ import Poster from "./Components/Pages/Poster";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
+
+////
+import { usestate } from "react";
+import { connect } from "react-redux";
+
 class App extends React.Component {
     componentDidMount() {
-        store.dispatch(loadUser());
+        // store.dispatch(loadUser());
     }
     render() {
         return (
@@ -26,30 +31,41 @@ class App extends React.Component {
                     <Navbar />
                     <div className="container">
                         <Switch>
-                            <Route path="/addevent">
-                                <AddEvent />
-                            </Route>
-                            <Route path="/eventcalander">
-                                <EventCalander />
-                            </Route>
-                            <Route path="/posters">
-                                <Poster />
-                            </Route>
-                            <Route path="/login">
-                                <Login />
-                            </Route>
-                            <Route path="/register">
-                                <Register />
-                            </Route>
-                            <Route path="/">
-                                <Home />
-                            </Route>
+                            <Route exact path="/addevent" component={AddEvent} />
+
+                            <Route exact path="/eventcalander" component={EventCalander} />
+
+                            <Route exact path="/posters" component={Poster} />
+
+                            <Route exact path="/login" component={Login} />
+
+                            <Route exact path="/register" component={Register} />
+
+                            <Route exact path="/" component={Home} />
                         </Switch>
                     </div>
+                    <Error />
                 </Router>
             </Provider>
         );
     }
 }
+
+const mapstatetoprops = (state) => ({
+    alert: state.alert,
+});
+
+const _Error = (props) => {
+    const { msg, status } = props.alert;
+    return (
+        <div>
+            {/* {msg.length != null ? msg.map((ms) => <div>{msg.ms}</div>) : null} */}
+            {msg ? <div>msg={msg}</div> : null}
+            {status ? <div>status={status}</div> : null}
+        </div>
+    );
+};
+
+const Error = connect(mapstatetoprops)(_Error);
 
 export default App;

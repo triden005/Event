@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
+// import axios from "axios";
+// import InfiniteScroll from "react-infinite-scroll-component";
 
 // const style = {
 //     height: 30,

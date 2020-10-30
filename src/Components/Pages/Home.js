@@ -1,6 +1,5 @@
 import React from "react";
-import Markdown from "react-markdown";
-import gfm from "remark-gfm";
+
 class Home extends React.Component {
     state = {};
 

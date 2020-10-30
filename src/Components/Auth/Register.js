@@ -1,13 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./register.css";
+import { connect } from "react-redux";
+import proptype from "prop-types";
+import { AddAlert } from "../../_action/AlertAction";
+import { register } from "../../_action/AuthAction";
+
 class Register extends React.Component {
     state = {};
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
-    onSubmit = (e) => {
+    onsubmit = (e) => {
         e.preventDefault();
+        if (this.state.password !== this.state.reppassword) {
+            this.props.AddAlert("password donot match", "bad password");
+            this.setState({ reppassword: "" });
+        } else {
+            this.props.register({ username: this.state.username, password: this.state.password });
+            this.setState({ username: "", password: "" });
+        }
     };
     onFileChange = (e) => {
         this.setState({
@@ -21,15 +33,15 @@ class Register extends React.Component {
                     <h1>Register</h1>
                     <p>Create An account to manage your Events...</p>
                     <div className="container">
-                        <form onSubmit={null} className="left">
+                        <form onSubmit={this.onsubmit} className="left">
                             <div>
                                 <label for="clubname">clubname</label>
                             </div>
-                            <input type="text" value={this.state.clubname} placeholder="The name" onChange={this.handelchange} name="clubname" id="clubname" required />
+                            <input type="text" value={this.state.clubname} placeholder="The name" onChange={this.handelchange} name="clubname" id="clubname" />
                             <div>
                                 <label for="bio">Bio</label>
                             </div>
-                            <textarea style={{ width: "350px", minHeight: "100px" }} value={this.state.bio} onChange={this.handelchange} type="text" placeholder="The Fame" name="bio" id="bio" required />
+                            <textarea style={{ width: "350px", minHeight: "100px" }} value={this.state.bio} onChange={this.handelchange} type="text" placeholder="The Fame" name="bio" id="bio" />
                             <div>
                                 <label for="username">UserName</label>
                             </div>
@@ -42,7 +54,7 @@ class Register extends React.Component {
                                 id="password"
                                 name="password"
                                 onChange={this.handelchange}
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                 value={this.state.password}
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
@@ -55,7 +67,7 @@ class Register extends React.Component {
                                 id="reppassword"
                                 name="reppassword"
                                 onChange={this.handelchange}
-                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                 value={this.state.reppassword}
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
@@ -82,5 +94,11 @@ class Register extends React.Component {
         );
     }
 }
+Register.proptype = {
+    isAuthenticated: proptype.bool.isRequired,
+};
+const mapstatetoprops = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default Register;
+export default connect(mapstatetoprops, { AddAlert, register })(Register);

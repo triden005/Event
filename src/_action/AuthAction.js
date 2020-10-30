@@ -35,23 +35,24 @@ export const loadUser = () => (dispatch, getState) => {
             })
         )
         .catch((err) => {
+            console.log(err);
             dispatch(AddAlert(err.response.data, "Some internal error occured"));
             dispatch({ type: AUTH_ERROR });
         });
 };
 
 //login User
-export const login = ({ email, password }) => (dispatch) => {
+export const login = ({ username, password }) => (dispatch) => {
     //Header
     const config = {
         headers: {
             "Content-Type": "application/json",
         },
     };
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ username, password });
 
     axios
-        .post("api/login", body, config)
+        .post("user/login", body, config)
         .then((res) =>
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -67,17 +68,17 @@ export const login = ({ email, password }) => (dispatch) => {
 };
 
 //Register user
-export const register = ({ name, email, password }) => (dispatch) => {
+export const register = ({ username, password }) => (dispatch) => {
     //header
     const config = {
         headers: {
             "Content-Type": "application/json",
         },
     };
-    const body = JSON.stringify({ name, email, password });
+    const body = JSON.stringify({ username, password });
 
     axios
-        .post("/api/users", body, config)
+        .post("/user/register", body, config)
         .then((res) =>
             dispatch({
                 type: REGISTER_SUCCESS,
