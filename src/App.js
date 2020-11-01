@@ -16,13 +16,11 @@ import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 
-////
-import { usestate } from "react";
-import { connect } from "react-redux";
+import { connect, getState } from "react-redux";
 
 class App extends React.Component {
     componentDidMount() {
-        // store.dispatch(loadUser());
+        store.dispatch(loadUser());
     }
     render() {
         return (
@@ -60,7 +58,7 @@ const _Error = (props) => {
     return (
         <div>
             {/* {msg.length != null ? msg.map((ms) => <div>{msg.ms}</div>) : null} */}
-            {msg ? <div>msg={msg}</div> : null}
+            {msg ? <div>msg={msg.message}</div> : null}
             {status ? <div>status={status}</div> : null}
         </div>
     );

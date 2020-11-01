@@ -7,7 +7,7 @@ import proptype from "prop-types";
 
 class Login extends React.Component {
     state = {
-        username: "",
+        email: "",
         password: "",
     };
 
@@ -17,11 +17,11 @@ class Login extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.login({ username: this.state.username, password: this.state.password });
+        this.props.login({ email: this.state.email, password: this.state.password });
     };
     componentDidUpdate(props) {
-        if (this.props.isAuthenticated === true && this.state.username !== "") {
-            this.setState({ username: "", password: "" });
+        if (this.props.isAuthenticated === true && this.state.email !== "") {
+            this.setState({ email: "", password: "" });
             this.props.history.push("/");
         }
     }
@@ -31,11 +31,14 @@ class Login extends React.Component {
                 <div className="Login">
                     <div class="container">
                         <form onSubmit={this.onSubmit}>
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" value={this.state.username} required onChange={this.handelchange} />
+                            <div className="left">
+                                <label for="email"> Email </label>
+                            </div>
+                            <input type="text" id="email" name="email" value={this.state.email} required onChange={this.handelchange} />
                             <br />
-                            <label for="password">Password</label>
-
+                            <div className="left">
+                                <label for="password">Password</label>
+                            </div>
                             <input
                                 type="password"
                                 id="password"

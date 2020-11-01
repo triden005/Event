@@ -7,25 +7,44 @@ import { AddAlert } from "../../_action/AlertAction";
 import { register } from "../../_action/AuthAction";
 
 class Register extends React.Component {
-    state = {};
-    handelchange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+    //form will have all the form data
+    state = {
+        form: {},
     };
+
+    //for handelling input
+    handelchange = (e) => {
+        this.setState({ form: { ...this.state.form, [e.target.name]: e.target.value } });
+    };
+
+    //for submit
     onsubmit = (e) => {
         e.preventDefault();
-        if (this.state.password !== this.state.reppassword) {
+        if (this.state.form.password !== this.state.form.confirm_password) {
             this.props.AddAlert("password donot match", "bad password");
-            this.setState({ reppassword: "" });
+
+            this.setState({ form: { ...this.state.form, confirm_password: "" } });
         } else {
-            this.props.register({ username: this.state.username, password: this.state.password });
-            this.setState({ username: "", password: "" });
+            this.props.register({ ...this.state.form });
+            this.setState({ form: { ...this.state.form, username: "", password: "" } });
         }
     };
+
+    //onfile upload
     onFileChange = (e) => {
         this.setState({
-            file: URL.createObjectURL(e.target.files[0]),
+            form: { ...this.state.form, file: e.target.files[0] },
+            image: URL.createObjectURL(e.target.files[0]),
         });
     };
+
+    //for redirect after successful registering
+    componentDidUpdate(props) {
+        if (this.props.isAuthenticated === true) {
+            this.props.history.push("/");
+        }
+    }
+
     render() {
         return (
             <div className="div1-register">
@@ -35,40 +54,39 @@ class Register extends React.Component {
                     <div className="container">
                         <form onSubmit={this.onsubmit} className="left">
                             <div>
-                                <label for="clubname">clubname</label>
+                                <label>clubname</label>
                             </div>
-                            <input type="text" value={this.state.clubname} placeholder="The name" onChange={this.handelchange} name="clubname" id="clubname" />
+                            <input type="text" value={this.state.form.username} placeholder="The name" onChange={this.handelchange} name="username" />
                             <div>
-                                <label for="bio">Bio</label>
+                                <label>Bio</label>
                             </div>
-                            <textarea style={{ width: "350px", minHeight: "100px" }} value={this.state.bio} onChange={this.handelchange} type="text" placeholder="The Fame" name="bio" id="bio" />
+                            <textarea style={{ width: "350px", minHeight: "100px" }} value={this.state.form.bio} onChange={this.handelchange} type="text" placeholder="The Fame" name="bio" />
                             <div>
-                                <label for="username">UserName</label>
+                                <label>Email</label>
                             </div>
-                            <input type="text" placeholder="Enter username" value={this.state.username} onChange={this.handelchange} name="username" id="username" required />
+                            <input type="email" placeholder="Enter Email" value={this.state.form.email} onChange={this.handelchange} name="email" required />
                             <div>
-                                <label for="password">Password</label>
+                                <label>Password</label>
                             </div>
                             <input
                                 type="password"
-                                id="password"
                                 name="password"
                                 onChange={this.handelchange}
                                 // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                value={this.state.password}
+                                value={this.state.form.password}
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
                             />
                             <div>
-                                <label for="reppasswordd">Repeat Password</label>
+                                <label>Repeat Password</label>
                             </div>
                             <input
                                 type="password"
                                 id="reppassword"
-                                name="reppassword"
+                                name="confirm_password"
                                 onChange={this.handelchange}
                                 // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                value={this.state.reppassword}
+                                value={this.state.form.confirm_password}
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
                             />
@@ -79,7 +97,7 @@ class Register extends React.Component {
 
                 <div className="Register right center">
                     <div>
-                        <img src={this.state.file} />
+                        <img src={this.state.image} />
                         <input type="file" onChange={this.onFileChange} />
                         <input type="submit" onClick={this.fileupload} value="Upload " />
                     </div>
