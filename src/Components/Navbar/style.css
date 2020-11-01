@@ -19,11 +19,19 @@
 /* navbar with right items */
 .navbar a.right {
     float: right;
-    text-align: center;
+    /* text-align: center;
     padding: 12px;
     color: white;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 17px; */
+}
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
 }
 /* Navbar links on mouse-over */
 .navbar a:hover {
@@ -77,6 +85,14 @@
     text-decoration: none;
     display: block;
     text-align: left;
+}
+.dropdown-content a.right {
+    float: none;
+    /* color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left; */
 }
 
 .dropdown-content a:hover {
