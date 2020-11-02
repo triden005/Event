@@ -11,16 +11,15 @@ export const loadUser = () => (dispatch, getState) => {
     dispatch({ type: USER_LOADING });
 
     //getting token from state
-
     var token = getState().auth.token;
 
     var user = null;
 
     if (token) {
-        user = jwt(token);
+        user = jwt(token); //Decode user
     }
+    console.log(user); // Debug Line
 
-    console.log(user);
     if (user) {
         dispatch({
             type: USER_LOADED,
@@ -35,7 +34,7 @@ export const loadUser = () => (dispatch, getState) => {
 };
 
 //login User
-export const login = ({ email, password }) => (dispatch, getState) => {
+export const login = ({ email, password }) => (dispatch) => {
     //Header
     const config = {
         headers: {

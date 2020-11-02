@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import store from "./Store";
 import { Provider } from "react-redux";
@@ -16,9 +16,11 @@ import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 
-import { connect, getState } from "react-redux";
+import { connect } from "react-redux";
+import Auth from "./Utils/Auth";
 
 class App extends React.Component {
+    state = {};
     componentDidMount() {
         store.dispatch(loadUser());
     }
@@ -29,15 +31,17 @@ class App extends React.Component {
                     <Navbar />
                     <div className="container">
                         <Switch>
-                            <Route exact path="/addevent" component={AddEvent} />
+                            <Route exact path="/addevent">
+                                <AddEvent />
+                            </Route>
+                            {/* Auth second param 0-for public 1-for only login 2-for only not login */}
+                            <Route exact path="/eventcalander" component={Auth(EventCalander, 1)} />
 
-                            <Route exact path="/eventcalander" component={EventCalander} />
-
-                            <Route exact path="/posters" component={Poster} />
+                            <Route exact path="/posters" component={Auth(Poster, 0)} />
 
                             <Route exact path="/login" component={Login} />
 
-                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/register" component={Auth(Register, 2)} />
 
                             <Route exact path="/" component={Home} />
                         </Switch>

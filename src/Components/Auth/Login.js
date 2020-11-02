@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./login.css";
 import { login } from "../../_action/AuthAction";
 import { connect } from "react-redux";
@@ -11,14 +10,18 @@ class Login extends React.Component {
         password: "",
     };
 
+    //handel input
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
 
+    //submit form
     onSubmit = (e) => {
         e.preventDefault();
         this.props.login({ email: this.state.email, password: this.state.password });
     };
+
+    //for redirect after successful submit
     componentDidUpdate(props) {
         if (this.props.isAuthenticated === true && this.state.email !== "") {
             this.setState({ email: "", password: "" });
