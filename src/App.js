@@ -31,23 +31,22 @@ class App extends React.Component {
                     <Navbar />
                     <div className="container">
                         <Switch>
-                            <Route exact path="/addevent">
-                                <AddEvent />
-                            </Route>
                             {/* Auth second param 0-for public 1-for only login 2-for only not login */}
-                            <Route exact path="/eventcalander" component={Auth(EventCalander, 1)} />
+                            <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
+
+                            <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
 
                             <Route exact path="/posters" component={Auth(Poster, 0)} />
 
-                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/login" component={Auth(Login, 2)} />
 
                             <Route exact path="/register" component={Auth(Register, 2)} />
 
-                            <Route exact path="/" component={Home} />
+                            <Route path="/" component={Home} />
                         </Switch>
                     </div>
-                    <Error />
                 </Router>
+                <Error />
             </Provider>
         );
     }

@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
-// import logger from "logger"
+import logger from "redux-logger";
 import thunk from "redux-thunk";
 import rootReducer from "./_reducers";
 // imports for creating store
@@ -7,7 +7,7 @@ import rootReducer from "./_reducers";
 
 const initialState = {};
 
-const middleware = [thunk];
+const middleware = [thunk, logger];
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //line for debugger
 
