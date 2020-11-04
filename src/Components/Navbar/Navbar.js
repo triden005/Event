@@ -11,11 +11,11 @@ class Navbar extends React.Component {
         const guest = (
             <>
                 <Link to="/register" className="right">
-                    <i class="fa fa-fw fa-user-plus" /> Register
+                    <i className="fa fa-fw fa-user-plus" /> Register
                 </Link>
 
                 <Link to="/login" className="right">
-                    <i class="fa fa-fw fa-user" /> Login
+                    <i className="fa fa-fw fa-user" /> Login
                 </Link>
             </>
         );
@@ -32,47 +32,48 @@ class Navbar extends React.Component {
                     <Link to="/">
                         <i class="fa fa-fw fa-home" /> Home
                     </Link>
-                    <span class="tohide">
+                    <span className="tohide">
                         <Link to="/addevent">
-                            <i class="fa fa-fw fa-plus-square" /> AddEvent
+                            <i className="fa fa-fw fa-plus-square" /> AddEvent
                         </Link>
 
                         <Link to="/eventcalander">
-                            <i class="fa fa-fw fa-calendar-plus" /> Calendar
+                            <i className="fa fa-fw fa-calendar-plus" /> Calendar
                         </Link>
                         <Link to="/posters">Poster</Link>
                     </span>
 
-                    <div class="dropdown right">
-                        <button class="dropbtn">
-                            <i class="fa fa-caret-down"></i> Options
+                    <div className="dropdown right">
+                        <button className="dropbtn">
+                            <i className="fa fa-caret-down"></i> Options
                         </button>
-                        <div class="dropdown-content">
+                        <div className="dropdown-content">
                             <Link to="/addevent">
-                                <i class="fa fa-fw fa-plus-square" /> AddEvent
+                                <i className="fa fa-fw fa-plus-square" /> AddEvent
                             </Link>
 
                             <Link to="/eventcalander">
-                                <i class="fa fa-fw fa-calendar-plus" /> Calendar
+                                <i className="fa fa-fw fa-calendar-plus" /> Calendar
                             </Link>
+                            <Link to="/posters">Poster</Link>
                             {isAuthenticated ? userlogin : guest}
                             {/* <Link to="/register">
-                                <i class="fa fa-fw fa-user-plus" /> Register
+                                <i className="fa fa-fw fa-user-plus" /> Register
                             </Link>
 
                             <Link to="/login">
-                                <i class="fa fa-fw fa-user" /> Login
+                                <i className="fa fa-fw fa-user" /> Login
                             </Link> */}
                         </div>
                     </div>
-                    <span class="tohide">
+                    <span className="tohide">
                         {isAuthenticated ? userlogin : guest}
-                        {/* <Link to="/register" className="right">
-                            <i class="fa fa-fw fa-user-plus" /> Register
+                        {/* <Link to="/register" classNameName="right">
+                            <i className="fa fa-fw fa-user-plus" /> Register
                         </Link>
 
-                        <Link to="/login" className="right">
-                            <i class="fa fa-fw fa-user" /> Login
+                        <Link to="/login" classNameName="right">
+                            <i className="fa fa-fw fa-user" /> Login
                         </Link> */}
                     </span>
                 </div>
