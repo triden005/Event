@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 import { loadUser } from "./_action/AuthAction";
 
 import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Pages/Home";
+import Home from "./Components/Pages/Home/Home";
 import EventCalander from "./Components/Pages/Eventcalender";
 import Poster from "./Components/Pages/Poster";
 import Login from "./Components/Auth/Login";

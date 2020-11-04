@@ -40,7 +40,7 @@ class AddEvent extends React.Component {
         axois(config)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log("hello world");
+                    // console.log("hello world");
                     this.props.AddAlert({ message: response.data.message }, 200);
                 }
 
@@ -49,7 +49,7 @@ class AddEvent extends React.Component {
             })
             .catch((error) => {
                 if (error.response.status === 401) {
-                    this.props.AddAlert({ message: "your are not logged in" }, "systemalert");
+                    this.props.AddAlert(error.response.data, "systemalert");
                     this.props.logout();
                 }
             });

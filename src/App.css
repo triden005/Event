@@ -2,7 +2,7 @@ body {
     background-color: #36096d;
     background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
     min-height: 100vh;
-    min-width: 100vw;
+    min-width: 90vw;
 }
 .container {
     text-align: center;
@@ -16,9 +16,9 @@ body {
     }
 }
 
-/* .right {
+.righttext {
     text-align: right;
-} */
+}
 .center {
     text-align: center;
 }
@@ -27,6 +27,22 @@ body {
 }
 .boldtext {
     font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: white;
+    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); */
 }
 /* .App-logo {
   height: 40vmin;
