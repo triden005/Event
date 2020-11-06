@@ -4,39 +4,25 @@ import "./home.css";
 
 import Markdown from "react-markdown";
 import gfm from "remark-gfm";
+import { loaddata } from "../../../_action/DataAction";
+import { connect, useSelector } from "react-redux";
 
 class Home extends React.Component {
-    state = {
-        data: null,
-    };
+    state = {};
 
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
     componentDidMount() {
-        var config = {
-            method: "get",
-            url: "api/v1/home",
-        };
-
-        axois(config)
-            .then((res) => {
-                this.setState({ data: res.data.data });
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        this.props.loaddata();
     }
     render() {
         return (
             <div className="home">
                 <div className="leftside">
-                    {this.state.data
-                        ? this.state.data.event.map((e) => {
-                              return <Wrapper onClick={this.onclick} {...e} key={e._id} />;
-                          })
-                        : null}
+                    {[...this.props.events.values()].map((ev) => {
+                        return <Wrapper key={ev._id} {...ev} />;
+                    })}
                 </div>
             </div>
         );
@@ -44,6 +30,7 @@ class Home extends React.Component {
 }
 
 function Wrapper(props) {
+    const users = useSelector((state) => state.data.users);
     const [active, setactive] = useState(false);
     const [large, setlarge] = useState(-1);
     const onclick = () => {
@@ -58,6 +45,7 @@ function Wrapper(props) {
                 {props.startTime ? <br /> : null}
                 {props.eventDate ? `On :${props.eventDate}` : null}
                 {props.eventDate ? <br /> : null}
+                by-:{users.get(props.user).username}
             </div>
             <div className="discription" style={{ width: "90%" }}>
                 <Markdown allowDangerousHtml plugins={[gfm]} source={props.discription} />
@@ -71,6 +59,7 @@ function Wrapper(props) {
                 {props.startTime ? `Duration :${props.startTime}` : null} {props.endTime ? ` - ${props.endTime}` : null}
                 {props.startTime ? <br /> : null}
                 {props.eventDate ? `On :${props.eventDate}` : null}
+                by-:{users.get(props.user).username}
             </div>
         </>
     );
@@ -84,4 +73,9 @@ function Wrapper(props) {
     );
 }
 
-export default Home;
+const mapprops = (state) => ({
+    users: state.data.users,
+    events: state.data.events,
+});
+
+export default connect(mapprops, { loaddata })(Home);

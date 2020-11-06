@@ -14,6 +14,9 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const SET_ALERT = "SET_ALERT";
 export const CLEAR_ALERT = "CLEAR_ALERT";
 
-// development idea
+// data action
+export const DATA_LOADING = "DATA_LOADING";
+export const DATA_LOADED = "DATA_LOADED";
 
+//development
 // export const CLEAR_ERROR = "CLEAR_ERROR";

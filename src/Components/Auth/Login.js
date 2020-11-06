@@ -22,7 +22,7 @@ class Login extends React.Component {
     };
 
     //for redirect after successful submit
-    componentDidUpdate(props) {
+    componentDidUpdate() {
         if (this.props.isAuthenticated === true && this.state.email !== "") {
             this.setState({ email: "", password: "" });
             this.props.history.push("/");
@@ -32,7 +32,7 @@ class Login extends React.Component {
         return (
             <div className="div1-login">
                 <div className="Login">
-                    <div class="container">
+                    <div className="container">
                         <form onSubmit={this.onSubmit}>
                             <div className="left">
                                 <label htmlFor="email"> Email </label>

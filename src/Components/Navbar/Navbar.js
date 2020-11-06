@@ -30,7 +30,7 @@ class Navbar extends React.Component {
             <nav className="navbar">
                 <div className="container">
                     <Link to="/">
-                        <i class="fa fa-fw fa-home" /> Home
+                        <i className="fa fa-fw fa-home" /> Home
                     </Link>
                     <span className="tohide">
                         <Link to="/addevent">
