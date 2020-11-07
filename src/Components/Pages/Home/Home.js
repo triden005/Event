@@ -12,17 +12,46 @@ class Home extends React.Component {
 
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
+
     };
     componentDidMount() {
         this.props.loaddata();
+       
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+         value : ''
+        };
+      }
+      
+    change = (e) =>{
+        const input = e.target.value;
+        this.setState({value : e.target.value});
+        
+    }
+    submit = (e)=>{
+        e.preventDefault();
     }
     render() {
         return (
             <div className="home">
                 <div className="leftside">
-                    {[...this.props.events.values()].map((ev) => {
+                {[...this.props.events.values()].map((ev) => {
+                        console.log(ev.eventName);
+                        if(ev.eventName.indexOf(this.state.value)!=-1)
                         return <Wrapper key={ev._id} {...ev} />;
                     })}
+                </div>
+                <div className="rightside">
+                    <form onSubmit = {this.submit}>
+                          
+                        <input onChange = {this.change}>
+                        
+                        </input>
+                        <button type="submit" >search</button>
+                       
+                    </form>
                 </div>
             </div>
         );
