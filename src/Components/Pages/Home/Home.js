@@ -24,6 +24,9 @@ class Home extends React.Component {
          value : ''
         };
       }
+      onchange =(e) =>{
+          const bhavesh =1;
+      }
       
     change = (e) =>{
         const input = e.target.value;
