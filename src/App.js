@@ -18,6 +18,7 @@ import AddEvent from "./Components/Pages/AddEvent";
 
 import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
+import { AlertModel } from "./Components/Alert/AlertModel";
 
 class App extends React.Component {
     state = {};
@@ -27,6 +28,7 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
+                <AlertModel />
                 <Router>
                     <Navbar />
                     <div className="container">

@@ -62,17 +62,17 @@
     color: rgba(0, 0, 0, 0);
     animation-timing-function: ease-in;
     color: black;
-    height: auto;
+    /* height: auto; */
 }
 
 @keyframes wobble {
     0% {
         /* transform: rotate(15deg); */
-        height: 200px;
+        max-height: 200px;
         color: rgba(0, 0, 0, 0);
     }
     100% {
         /* transform: rotate(0deg); */
-        height: 300px;
+        max-height: 500px;
     }
 }
