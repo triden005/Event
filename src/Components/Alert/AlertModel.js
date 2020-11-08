@@ -44,7 +44,7 @@ const AlertBox = (props) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onclick();
-        }, 3000 - props.index * 600);
+        }, 3500 - props.index * 650);
         return () => clearTimeout(timer);
     }, []);
     return (
