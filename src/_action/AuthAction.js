@@ -12,24 +12,28 @@ export const loadUser = () => (dispatch, getState) => {
 
     //getting token from state
     var token = getState().auth.token;
-
     var user = null;
 
     if (token) {
         user = jwt(token); //Decode user
-    }
-    console.log(user); // Debug Line
 
-    if (user) {
-        dispatch({
-            type: USER_LOADED,
-            payload: user,
-        });
+        console.log(user); // Debug Line
+
+        if (user && user.exp > Date.now() / 1000) {
+            dispatch({
+                type: USER_LOADED,
+                payload: user,
+            });
+        } else {
+            dispatch({
+                type: AUTH_ERROR,
+            });
+            dispatch(AddAlert({ message: "UserValidation error" }, "warning"));
+        }
     } else {
         dispatch({
             type: AUTH_ERROR,
         });
-        dispatch(AddAlert("UserValidation error", 320));
     }
 };
 
@@ -54,11 +58,11 @@ export const login = ({ email, password }) => (dispatch) => {
             });
 
             //add success alert and loaduser
-            dispatch(AddAlert({ message: res.data.message }, 200));
+            dispatch(AddAlert({ message: res.data.message }, "success"));
             dispatch(loadUser());
         })
         .catch((err) => {
-            dispatch(AddAlert(err.response.data, err.response.status));
+            dispatch(AddAlert(err.response.data, "warning"));
             dispatch({
                 type: LOGIN_FAIL,
             });
@@ -85,18 +89,19 @@ export const register = (data) => (dispatch) => {
             });
 
             //add success message and loaduser
-            dispatch(AddAlert({ message: res.data.message }, 200));
+            dispatch(AddAlert({ message: res.data.message }, "success"));
             dispatch(loadUser());
         })
         .catch((err) => {
-            dispatch(AddAlert(err.response.data, err.response.status));
+            dispatch(AddAlert(err.response.data, "warning"));
             dispatch({ type: REGISTER_FAIL });
         });
 };
 
 //logout
-export const logout = () => {
-    return {
+export const logout = () => (dispatch) => {
+    dispatch(AddAlert({ message: "Logout successfully!!" }, "info"));
+    dispatch({
         type: LOGOUT_SUCESS,
-    };
+    });
 };

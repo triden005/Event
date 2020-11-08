@@ -28,9 +28,9 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <AlertModel />
                 <Router>
                     <Navbar />
+                    <AlertModel />
                     <div className="container">
                         <Switch>
                             {/* Auth second param 0-for public 1-for only login 2-for only not login */}
