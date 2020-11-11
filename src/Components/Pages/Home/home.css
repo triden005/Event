@@ -88,34 +88,36 @@
 }
 
 .leftside {
-  width: 70vw;
+  width: 75vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .rightside {
-  width: 30vw;
+  width: 25vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .wrapper {
-  margin: 10%;
+  margin: auto;
+  margin-top: 3rem;
   margin-bottom: 0;
   display: flex;
   flex-direction: row;
   background-color: #00adb5;
-  width: 70%;
+  width: 77%;
   padding: 2.75rem;
-  border-radius: 3.5rem;
-  height: 25vh;
+  border-radius: 2.5rem;
+  height: 210px;
+  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
 }
 .wrapper .image-small {
   height: 100%;
   width: 33%;
 }
 .wrapper .discription-small {
-  width: 70%;
+  width: 67%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,12 +125,44 @@
 .image-small img {
   width: 100%;
   height: 100%;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
+}
+.discription-small {
+  box-sizing: border-box;
+  padding-left: 25px;
 }
 .discription-small .date-time {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
 }
 .discription-small h3 {
   margin: 0;
+}
+.discription-small .short-info {
+  text-align: center;
+  overflow: hidden;
+}
+.discription-small * {
+  padding-top: 2px;
+  padding-bottom: 8px;
+}
+.event-name {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+.venue {
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.date-time {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+.short-info {
+  font-size: 1.2rem;
 }

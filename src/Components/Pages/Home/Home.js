@@ -88,13 +88,13 @@ function Wrapper(props) {
         </div>
         <div className="date-time">
           <div className="event-date">
-            {props.eventDate ? `On :${props.eventDate}` : null}
+            {props.eventDate ? `${props.eventDate}` : null}
           </div>
           <div className="start-time">
-            {props.startTime ? `Duration :${props.startTime}` : null}{" "}
+            {props.startTime ? `Starts at:${props.startTime}` : null}{" "}
           </div>
           <div className="end-time">
-            {props.endTime ? ` - ${props.endTime}` : null}
+            {props.endTime ? `Ends at: ${props.endTime}` : null}
           </div>
         </div>
         <div className="short-info">
