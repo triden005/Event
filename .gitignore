@@ -1,9 +1,0 @@
-node_modules
-
-.vscode
-
-debug.log
-
-package-lock.json
-
-.gitignore
