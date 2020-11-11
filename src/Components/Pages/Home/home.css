@@ -99,7 +99,7 @@
   flex-direction: column;
   align-items: center;
 }
-.wrapper {
+.wrapper-small {
   margin: auto;
   margin-top: 3rem;
   margin-bottom: 0;
@@ -111,12 +111,13 @@
   border-radius: 2.5rem;
   height: 210px;
   box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+  cursor: pointer;
 }
-.wrapper .image-small {
+.wrapper-small .image-small {
   height: 100%;
   width: 33%;
 }
-.wrapper .discription-small {
+.wrapper-small .discription-small {
   width: 67%;
   display: flex;
   flex-direction: column;
@@ -148,21 +149,47 @@
   padding-top: 2px;
   padding-bottom: 8px;
 }
-.event-name {
+.discription-small .event-name {
   font-weight: bold;
   font-style: italic;
   font-size: 1.5rem;
 }
-.venue {
+.discription-small .venue {
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 400;
 }
-.date-time {
+.discription-small .date-time {
   font-weight: 600;
   font-style: italic;
   font-size: 1.2rem;
 }
-.short-info {
+.discription-small .short-info {
   font-size: 1.2rem;
+}
+
+/* styles for large tiles */
+.wrapper-large {
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  background-color: #00adb5;
+  width: 77%;
+  padding: 2.75rem;
+  border-radius: 2.5rem;
+  height: 400px;
+  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+  cursor: pointer;
+}
+.wrapper-large .image-large {
+  height: 100%;
+  width: 33%;
+}
+.wrapper-large .discription-large {
+  width: 67%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

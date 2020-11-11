@@ -62,18 +62,28 @@ function Wrapper(props) {
   const big = (
     <>
       <div className="discription-large">
-        <h3>{props.eventName}</h3>
-        {props.startTime ? `Duration :${props.startTime}` : null}{" "}
-        {props.endTime ? ` - ${props.endTime}` : null}
-        {props.startTime ? <br /> : null}
-        {props.eventDate ? `On :${props.eventDate}` : null}
-        {props.eventDate ? <br /> : null}
-        by-:{users.get(props.user).username}
-        <Markdown
-          allowDangerousHtml
-          plugins={[gfm]}
-          source={props.discription}
-        />
+        <div className="event-name">
+          <h3>{props.eventName}</h3>
+        </div>
+        <div className="venue">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
+        </div>
+        <div className="date-time">
+          <div className="event-date">
+            {props.eventDate ? `${props.eventDate}` : null}
+          </div>
+          <div className="start-time">
+            {props.startTime ? `Starts at:${props.startTime}` : null}{" "}
+          </div>
+          <div className="end-time">
+            {props.endTime ? `Ends at: ${props.endTime}` : null}
+          </div>
+        </div>
+        <div className="short-info">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
+          labore provident aliquid molestias commodi minima nam sed nulla aut.
+          Nulla delectus quibusdam fugiat fugit
+        </div>
       </div>
     </>
   );
@@ -107,18 +117,21 @@ function Wrapper(props) {
   );
   return (
     <>
-      <div className="wrapper" onClick={onclick} large={large}>
-        {large === -1 ? (
+      {large === -1 ? (
+        <div className="wrapper-small" onClick={onclick} large={large}>
           <div className="image-small">
             <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
           </div>
-        ) : (
+          {large === 1 ? big : small}
+        </div>
+      ) : (
+        <div className="wrapper-large" onClick={onclick} large={large}>
           <div className="image-large">
             <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
           </div>
-        )}
-        {large === 1 ? big : small}
-      </div>
+          {large === 1 ? big : small}
+        </div>
+      )}
     </>
   );
 }
