@@ -81,19 +81,20 @@ function Wrapper(props) {
         </div>
       </div>
       <div className="large-info">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse corrupti
-        architecto excepturi aliquid sint a dolore, quidem quae, numquam illum
-        cum magnam nesciunt? Fugiat assumenda accusantium aliquam autem cum
-        unde? Consequuntur obcaecati dicta neque nihil maxime dolores pariatur
-        earum recusandae officia ipsa ea architecto vitae odio, est itaque saepe
-        hic esse repellendus autem voluptatum? Quos atque eum cumque odio ipsa?
-        Deleniti illum facere laudantium accusantium quod porro hic beatae,
-        natus blanditiis in vitae aliquam officia ipsam temporibus praesentium
-        numquam delectus, velit, nemo dolores! Id facere nihil quis nisi
-        cupiditate. Tenetur. Facilis eligendi, officia laboriosam odio vero
-        nulla? Ipsum, quod aperiam obcaecati quia laborum laudantium quasi vitae
-        reprehenderit quae itaque nobis voluptatum quo eveniet ab saepe! Itaque
-        nulla minima animi soluta!
+        <Markdown
+          allowDangerousHtml
+          plugins={[gfm]}
+          source={props.discription}
+        ></Markdown>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat eum
+        veniam nulla eveniet officiis fugiat exercitationem iure atque vel
+        impedit. Vel voluptate quod, ea quo facilis perspiciatis officia aliquam
+        in cumque iusto, quos inventore fuga impedit assumenda at delectus?
+        Totam sint asperiores placeat tempore perspiciatis corrupti beatae quae,
+        ea quis illum corporis doloremque dolor sapiente porro obcaecati
+        repellat dignissimos deserunt officiis. Minima enim fuga voluptatibus
+        labore. Cumque sequi tempora nihil fugiat dolore nam accusamus, fuga eum
+        quod veritatis iure maiores illo impedit?
       </div>
     </>
   );
