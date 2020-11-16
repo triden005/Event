@@ -43,7 +43,7 @@ class AddEvent extends React.Component {
     formdata.append("end_time", this.state.etime);
     formdata.append("date", this.state.sdate);
     formdata.append("discription", this.state.discription);
-    formdata.append("short_discription", this.state.shortDiscription);
+    formdata.append("short_discription", this.state.sdiscription);
     formdata.append("schedule", this.state.schedule);
     formdata.append("event_name", this.state.eventname);
     formdata.append("start_date", this.state.sdate);
@@ -171,9 +171,9 @@ class AddEvent extends React.Component {
                 <div className="short-textarea">
                   <textarea
                     type="text"
-                    name="short_discription"
+                    name="sdiscription"
                     id="short-discription"
-                    value={this.state.shortDiscription}
+                    value={this.state.sdiscription}
                     onChange={this.handelchange}
                   ></textarea>
                 </div>

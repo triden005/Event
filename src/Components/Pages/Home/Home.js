@@ -38,9 +38,8 @@ class Home extends React.Component {
       <div className="home">
         <div className="leftside">
           {[...this.props.events.values()].map((ev) => {
-            // let discription =
-            //   ev.discription + "\n\n --- \n" + `<center>${props.time-table}</center>`;
-            // ev.discription = discription;
+            let discription = ev.discription + "\n\n--- \n" + ev.schedule;
+            ev.discription = discription;
             if (ev.eventName.indexOf(this.state.value) != -1)
               return <Wrapper key={ev._id} {...ev} />;
           })}
@@ -115,9 +114,11 @@ function Wrapper(props) {
           </div>
         </div>
         <div className="short-info">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
-          labore provident aliquid molestias commodi minima nam sed nulla aut.
-          Nulla delectus quibusdam fugiat fugit
+          <Markdown
+            allowDangerousHtml
+            plugins={[gfm]}
+            source={props.shortDiscription}
+          ></Markdown>
         </div>
       </div>
     </>
@@ -133,10 +134,11 @@ function Wrapper(props) {
             {large === 1 ? big : small}
           </div>
           <div className="time-table">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Repudiandae vel nihil consequuntur, nesciunt debitis minus sit. Ut
-            veniam quidem harum aspernatur, recusandae dolores numquam quibusdam
-            laboriosam optio modi maxime et.
+            <Markdown
+              allowDangerousHtml
+              plugins={[gfm]}
+              source={props.schedule}
+            ></Markdown>
           </div>
         </div>
       ) : (
