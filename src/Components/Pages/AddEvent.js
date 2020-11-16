@@ -7,7 +7,6 @@ import gfm from "remark-gfm";
 import { setauthtoken } from "../../Utils/setauthtoken";
 import proptype from "prop-types";
 import { connect } from "react-redux";
-import qs from "querystring";
 import axois from "axios";
 import { logout } from "../../_action/AuthAction";
 import { AddAlert } from "../../_action/AlertAction";
@@ -38,31 +37,29 @@ class AddEvent extends React.Component {
     };
     onSubmit = (e) => {
         e.preventDefault();
-
-        var body = qs.stringify({
-            start_time: this.state.stime,
-            end_time: this.state.etime,
-            event_name: this.state.eventname,
-            start_date: this.state.sdate,
-            end_date: this.state.sdate,
-            venue: this.state.venue,
-            discription: this.state.discription,
-        });
+        var formdata = new FormData();
+        formdata.append("eimage", this.state.filesend);
+        formdata.append("start_time", this.state.stime);
+        formdata.append("end_time", this.state.etime);
+        formdata.append("date", this.state.sdate);
+        formdata.append("discription", this.state.discription);
+        formdata.append("short_discription", this.state.discription);
+        formdata.append("event_name", this.state.eventname);
+        formdata.append("start_date", this.state.sdate);
+        formdata.append("end_date", this.state.edate);
         setauthtoken();
         var config = {
             method: "post",
             url: "/api/v1/event/addEvent/" + this.props.user._id,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            data: body,
+            headers: { "Content-Type": "multipart/form-data" },
+
+            data: formdata,
         };
-        console.log(body);
         axois(config)
             .then((response) => {
                 if (response.status === 200) {
                     // console.log("hello world");
-                    this.props.AddAlert({ message: response.data.message }, 200);
+                    this.props.AddAlert({ message: response.data.message }, "success");
                 }
 
                 this.props.history.push("/");
@@ -70,7 +67,7 @@ class AddEvent extends React.Component {
             })
             .catch((error) => {
                 if (error.response.status === 401) {
-                    this.props.AddAlert(error.response.data, "systemalert");
+                    this.props.AddAlert(error.response.data, "danger");
                     this.props.logout();
                 }
             });
@@ -78,6 +75,7 @@ class AddEvent extends React.Component {
     onFileChange = (e) => {
         this.setState({
             file: URL.createObjectURL(e.target.files[0]),
+            filesend: e.target.files[0],
         });
     };
     render() {

@@ -12,9 +12,9 @@ export default function Auth(Component, type) {
 
         // console.log(isAuthenticated, type);  // debugging use == with type and not ===
         useEffect(() => {
-            if (isLoading === false) {
+            if (isLoading !== true) {
                 if (type === 1) {
-                    if (isAuthenticated !== true) {
+                    if (isAuthenticated === false) {
                         props.history.push("/login");
 
                         dispatch(AddAlert({ message: "Please Login to Continue" }, "systemAllert"));
