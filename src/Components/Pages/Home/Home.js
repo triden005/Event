@@ -31,11 +31,16 @@ class Home extends React.Component {
     e.preventDefault();
   };
   render() {
+    // let discription =
+    //   props.discription + "\n\n---\n<center>time-table here</center>";
+    // props.discription = discription;
     return (
       <div className="home">
         <div className="leftside">
           {[...this.props.events.values()].map((ev) => {
-            console.log(ev.eventName);
+            // let discription =
+            //   ev.discription + "\n\n --- \n" + `<center>${props.time-table}</center>`;
+            // ev.discription = discription;
             if (ev.eventName.indexOf(this.state.value) != -1)
               return <Wrapper key={ev._id} {...ev} />;
           })}
@@ -81,19 +86,11 @@ function Wrapper(props) {
         </div>
       </div>
       <div className="large-info">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse corrupti
-        architecto excepturi aliquid sint a dolore, quidem quae, numquam illum
-        cum magnam nesciunt? Fugiat assumenda accusantium aliquam autem cum
-        unde? Consequuntur obcaecati dicta neque nihil maxime dolores pariatur
-        earum recusandae officia ipsa ea architecto vitae odio, est itaque saepe
-        hic esse repellendus autem voluptatum? Quos atque eum cumque odio ipsa?
-        Deleniti illum facere laudantium accusantium quod porro hic beatae,
-        natus blanditiis in vitae aliquam officia ipsam temporibus praesentium
-        numquam delectus, velit, nemo dolores! Id facere nihil quis nisi
-        cupiditate. Tenetur. Facilis eligendi, officia laboriosam odio vero
-        nulla? Ipsum, quod aperiam obcaecati quia laborum laudantium quasi vitae
-        reprehenderit quae itaque nobis voluptatum quo eveniet ab saepe! Itaque
-        nulla minima animi soluta!
+        <Markdown
+          allowDangerousHtml
+          plugins={[gfm]}
+          source={props.discription}
+        ></Markdown>
       </div>
     </>
   );
@@ -128,11 +125,19 @@ function Wrapper(props) {
   return (
     <>
       {large === -1 ? (
-        <div className="wrapper-small" onClick={onclick} large={large}>
-          <div className="image-small">
-            <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+        <div className="wrapper">
+          <div className="wrapper-small" onClick={onclick} large={large}>
+            <div className="image-small">
+              <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+            </div>
+            {large === 1 ? big : small}
           </div>
-          {large === 1 ? big : small}
+          <div className="time-table">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Repudiandae vel nihil consequuntur, nesciunt debitis minus sit. Ut
+            veniam quidem harum aspernatur, recusandae dolores numquam quibusdam
+            laboriosam optio modi maxime et.
+          </div>
         </div>
       ) : (
         <div className="wrapper-large" onClick={onclick} large={large}>
