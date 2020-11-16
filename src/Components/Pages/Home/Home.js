@@ -73,17 +73,27 @@ function Wrapper(props) {
             {props.eventDate ? `${props.eventDate}` : null}
           </div>
           <div className="start-time">
-            {props.startTime ? `Starts at:${props.startTime}` : null}{" "}
+            {props.startTime ? `Starts:${props.startTime}` : null}{" "}
           </div>
           <div className="end-time">
-            {props.endTime ? `Ends at: ${props.endTime}` : null}
+            {props.endTime ? `Ends: ${props.endTime}` : null}
           </div>
         </div>
-        <div className="short-info">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
-          labore provident aliquid molestias commodi minima nam sed nulla aut.
-          Nulla delectus quibusdam fugiat fugit
-        </div>
+      </div>
+      <div className="large-info">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse corrupti
+        architecto excepturi aliquid sint a dolore, quidem quae, numquam illum
+        cum magnam nesciunt? Fugiat assumenda accusantium aliquam autem cum
+        unde? Consequuntur obcaecati dicta neque nihil maxime dolores pariatur
+        earum recusandae officia ipsa ea architecto vitae odio, est itaque saepe
+        hic esse repellendus autem voluptatum? Quos atque eum cumque odio ipsa?
+        Deleniti illum facere laudantium accusantium quod porro hic beatae,
+        natus blanditiis in vitae aliquam officia ipsam temporibus praesentium
+        numquam delectus, velit, nemo dolores! Id facere nihil quis nisi
+        cupiditate. Tenetur. Facilis eligendi, officia laboriosam odio vero
+        nulla? Ipsum, quod aperiam obcaecati quia laborum laudantium quasi vitae
+        reprehenderit quae itaque nobis voluptatum quo eveniet ab saepe! Itaque
+        nulla minima animi soluta!
       </div>
     </>
   );
@@ -101,10 +111,10 @@ function Wrapper(props) {
             {props.eventDate ? `${props.eventDate}` : null}
           </div>
           <div className="start-time">
-            {props.startTime ? `Starts at:${props.startTime}` : null}{" "}
+            {props.startTime ? `Starts:${props.startTime}` : null}{" "}
           </div>
           <div className="end-time">
-            {props.endTime ? `Ends at: ${props.endTime}` : null}
+            {props.endTime ? `Ends: ${props.endTime}` : null}
           </div>
         </div>
         <div className="short-info">
