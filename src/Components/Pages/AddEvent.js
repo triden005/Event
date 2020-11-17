@@ -175,6 +175,7 @@ class AddEvent extends React.Component {
                     id="short-discription"
                     value={this.state.sdiscription}
                     onChange={this.handelchange}
+                    required
                   ></textarea>
                 </div>
                 <div>
@@ -187,6 +188,7 @@ class AddEvent extends React.Component {
                     id="schedule-discription"
                     value={this.state.schedule}
                     onChange={this.handelchange}
+                    required
                   ></textarea>
                 </div>
                 <div>
@@ -199,6 +201,7 @@ class AddEvent extends React.Component {
                     id="discription"
                     value={this.state.discription}
                     onChange={this.handelchange}
+                    required
                   ></textarea>
                 </div>
                 <div
@@ -251,6 +254,11 @@ class AddEvent extends React.Component {
               allowDangerousHtml
               plugins={[gfm]}
               source={this.state.discription}
+            />
+            <Markdown
+              allowDangerousHtml
+              plugins={[gfm]}
+              source={this.state.schedule}
             />
           </div>
         </div>

@@ -102,6 +102,8 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
+  width: 96%;
+  margin: auto;
 }
 .time-table {
   width: 18%;
@@ -177,6 +179,7 @@
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 400;
+  text-align: center;
 }
 .discription-small .date-time {
   font-weight: 600;
@@ -185,6 +188,7 @@
 }
 .discription-small .short-info {
   font-size: 1.2rem;
+  text-align: center;
 }
 
 /* styles for large tiles */

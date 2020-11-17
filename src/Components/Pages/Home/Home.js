@@ -7,6 +7,8 @@ import gfm from "remark-gfm";
 import { loaddata } from "../../../_action/DataAction";
 import { connect, useSelector } from "react-redux";
 
+import noImage from "./no-image.jpg";
+
 class Home extends React.Component {
   state = {};
 
@@ -40,6 +42,10 @@ class Home extends React.Component {
           {[...this.props.events.values()].map((ev) => {
             let discription = ev.discription + "\n\n--- \n" + ev.schedule;
             ev.discription = discription;
+
+            if (ev.eimage) {
+              ev.eimage = `http://localhost:8000${ev.eimage}`;
+            }
             if (ev.eventName.indexOf(this.state.value) != -1)
               return <Wrapper key={ev._id} {...ev} />;
           })}
@@ -129,7 +135,11 @@ function Wrapper(props) {
         <div className="wrapper">
           <div className="wrapper-small" onClick={onclick} large={large}>
             <div className="image-small">
-              <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+              {props.eimage ? (
+                <img src={props.eimage} alt="Event" />
+              ) : (
+                <img src={noImage} alt="No Image" />
+              )}
             </div>
             {large === 1 ? big : small}
           </div>
@@ -144,7 +154,11 @@ function Wrapper(props) {
       ) : (
         <div className="wrapper-large" onClick={onclick} large={large}>
           <div className="image-large">
-            <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+            {props.eimage ? (
+              <img src={props.eimage} alt="Event" />
+            ) : (
+              <img src={noImage} alt="No Image" />
+            )}
           </div>
           {large === 1 ? big : small}
         </div>
