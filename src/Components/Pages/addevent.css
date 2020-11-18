@@ -153,6 +153,7 @@
   border-radius: 6px;
   height: 2rem;
   box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+  font-size: 0.9rem;
 }
 .addevent-leftbox .submitbutton {
   max-width: 400px;
