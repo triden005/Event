@@ -88,16 +88,36 @@
 }
 
 .leftside {
-  width: 75vw;
+  width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .rightside {
-  width: 25vw;
+  width: 20vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 96%;
+  margin: auto;
+}
+.time-table {
+  width: 18%;
+  margin: auto;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  margin-right: 0;
+  background-color: #393e46;
+  color: white;
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+  height: 210px;
+  overflow: scroll;
 }
 .wrapper-small {
   margin: auto;
@@ -106,12 +126,11 @@
   display: flex;
   flex-direction: row;
   background-color: #00adb5;
-  width: 77%;
+  width: 67%;
   padding: 2.75rem;
   border-radius: 1.5rem;
   height: 210px;
   box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
-
   cursor: pointer;
 }
 .wrapper-small .image-small {
@@ -160,6 +179,7 @@
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 400;
+  text-align: center;
 }
 .discription-small .date-time {
   font-weight: 600;
@@ -168,6 +188,7 @@
 }
 .discription-small .short-info {
   font-size: 1.2rem;
+  text-align: center;
 }
 
 /* styles for large tiles */
@@ -185,7 +206,7 @@
   height: 500px;
   box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
   cursor: pointer;
-  overflow: hidden;
+  overflow: scroll;
 }
 .wrapper-large .image-large {
   height: 60%;

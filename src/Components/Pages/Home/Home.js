@@ -7,6 +7,8 @@ import gfm from "remark-gfm";
 import { loaddata } from "../../../_action/DataAction";
 import { connect, useSelector } from "react-redux";
 
+import noImage from "./no-image.jpg";
+
 class Home extends React.Component {
   state = {};
 
@@ -31,11 +33,19 @@ class Home extends React.Component {
     e.preventDefault();
   };
   render() {
+    // let discription =
+    //   props.discription + "\n\n---\n<center>time-table here</center>";
+    // props.discription = discription;
     return (
       <div className="home">
         <div className="leftside">
           {[...this.props.events.values()].map((ev) => {
-            console.log(ev.eventName);
+            let discription = ev.discription + "\n\n--- \n" + ev.schedule;
+            ev.discription = discription;
+
+            if (ev.eimage) {
+              ev.eimage = `http://localhost:8000${ev.eimage}`;
+            }
             if (ev.eventName.indexOf(this.state.value) != -1)
               return <Wrapper key={ev._id} {...ev} />;
           })}
@@ -86,15 +96,6 @@ function Wrapper(props) {
           plugins={[gfm]}
           source={props.discription}
         ></Markdown>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat eum
-        veniam nulla eveniet officiis fugiat exercitationem iure atque vel
-        impedit. Vel voluptate quod, ea quo facilis perspiciatis officia aliquam
-        in cumque iusto, quos inventore fuga impedit assumenda at delectus?
-        Totam sint asperiores placeat tempore perspiciatis corrupti beatae quae,
-        ea quis illum corporis doloremque dolor sapiente porro obcaecati
-        repellat dignissimos deserunt officiis. Minima enim fuga voluptatibus
-        labore. Cumque sequi tempora nihil fugiat dolore nam accusamus, fuga eum
-        quod veritatis iure maiores illo impedit?
       </div>
     </>
   );
@@ -119,9 +120,11 @@ function Wrapper(props) {
           </div>
         </div>
         <div className="short-info">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam
-          labore provident aliquid molestias commodi minima nam sed nulla aut.
-          Nulla delectus quibusdam fugiat fugit
+          <Markdown
+            allowDangerousHtml
+            plugins={[gfm]}
+            source={props.shortDiscription}
+          ></Markdown>
         </div>
       </div>
     </>
@@ -129,16 +132,33 @@ function Wrapper(props) {
   return (
     <>
       {large === -1 ? (
-        <div className="wrapper-small" onClick={onclick} large={large}>
-          <div className="image-small">
-            <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+        <div className="wrapper">
+          <div className="wrapper-small" onClick={onclick} large={large}>
+            <div className="image-small">
+              {props.eimage ? (
+                <img src={props.eimage} alt="Event" />
+              ) : (
+                <img src={noImage} alt="No Image" />
+              )}
+            </div>
+            {large === 1 ? big : small}
           </div>
-          {large === 1 ? big : small}
+          <div className="time-table">
+            <Markdown
+              allowDangerousHtml
+              plugins={[gfm]}
+              source={props.schedule}
+            ></Markdown>
+          </div>
         </div>
       ) : (
         <div className="wrapper-large" onClick={onclick} large={large}>
           <div className="image-large">
-            <img src="https://miro.medium.com/max/12000/1*pUi3vkj06Vqp_sXeiI-UbQ.jpeg" />
+            {props.eimage ? (
+              <img src={props.eimage} alt="Event" />
+            ) : (
+              <img src={noImage} alt="No Image" />
+            )}
           </div>
           {large === 1 ? big : small}
         </div>

@@ -10,27 +10,30 @@ export const AlertModel = () => {
 
     useEffect(() => {
         if (Alert.status != null) {
-            setalerts([...alerts, Alert]);
+            setalerts((alerts) => [
+                { id: uuid(), message: Alert.msg.message, status: Alert.status },
+                ...alerts,
+            ]);
         }
     }, [Alert]);
-
-    const removealert = (index) => {
-        console.log(index);
-        setTimeout(() => {
-            var arr = alerts.slice();
-            arr.splice(index, 1);
-            setalerts(arr);
-        }, 600);
+    const removealert = (id) => {
+        // setalerts((prevalerts) => {
+        //     let newalerts = prevalerts.filter((alert) => {
+        //         return alert.id !== id;
+        //     });
+        //     return newalerts;
+        // });
+        setalerts((alerts) => alerts.filter((alert) => alert.id !== id));
     };
-    const data = alerts.map((alert, index) => {
-        return <AlertBox key={uuid()} {...alert} removealert={removealert} index={index} />;
-    });
     return (
         <div className="alertmodel">
-            {/* {alerts.map((alert, index) => {
-                return <AlertBox key={uuid()} {...alert} removealert={removealert} index={index} />;
-            })} */}
-            {data}
+            {alerts
+                ? alerts.length
+                    ? alerts.map((alert) => {
+                          return <AlertBox key={alert.id} {...alert} removealert={removealert} />;
+                      })
+                    : null
+                : null}
         </div>
     );
 };
@@ -39,17 +42,26 @@ const AlertBox = (props) => {
     const [click, setclick] = useState(0);
     const onclick = () => {
         setclick(1);
-        props.removealert(props.index);
+        setTimeout(() => {
+            props.removealert(props.id);
+        }, 600);
     };
     useEffect(() => {
         const timer = setTimeout(() => {
             onclick();
-        }, 3500 - props.index * 650);
-        return () => clearTimeout(timer);
+        }, 1500);
+        return () => {
+            // clearInterval(timer);
+        };
     }, []);
     return (
-        <div className={`alert center ${props.status}`} style={{ color: "white" }} onClick={onclick} click={click}>
-            {props.msg.message} <span className="closebtn righttext">&times;</span>
+        <div
+            className={`alert center ${props.status}`}
+            style={{ color: "white" }}
+            onClick={onclick}
+            click={click}
+        >
+            {props.message} <span className="closebtn righttext">&times;</span>
         </div>
     );
 };
