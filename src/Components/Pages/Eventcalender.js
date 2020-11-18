@@ -24,19 +24,15 @@ useEffect(()=>{
     <>
    { 
     <FullCalendar
-      plugins={[ dayGridPlugin ]}
+        plugins={[ dayGridPlugin ]}
 
-      initialView="dayGridMonth"
-    
-      events = {state}
-            
+        initialView="dayGridMonth"
+      
+        events = {state}
     />
     }
-
     </>
   )
-  
-  
 }
 const mapstatetoprops = (state) => ({
   users: state.data.users,
