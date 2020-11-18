@@ -118,6 +118,7 @@
   box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
   height: 210px;
   overflow: scroll;
+  font-size: 0.9rem;
 }
 .wrapper-small {
   margin: auto;
@@ -173,21 +174,21 @@
 .discription-small .event-name {
   font-weight: bold;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 .discription-small .venue {
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   text-align: center;
 }
 .discription-small .date-time {
   font-weight: 600;
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .discription-small .short-info {
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
 }
 

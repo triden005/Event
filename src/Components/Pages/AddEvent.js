@@ -255,6 +255,7 @@ class AddEvent extends React.Component {
               plugins={[gfm]}
               source={this.state.discription}
             />
+            <hr />
             <Markdown
               allowDangerousHtml
               plugins={[gfm]}

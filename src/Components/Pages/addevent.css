@@ -127,6 +127,7 @@
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 30px;
+  font-size: 1rem;
 }
 .addevent-leftbox input[type="submit"] {
   background-color: #4caf50;
