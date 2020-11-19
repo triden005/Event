@@ -3,7 +3,16 @@ import qs from "querystring";
 import jwt from "jwt-decode";
 //importing action types for authentication
 
-import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCESS, REGISTER_SUCCESS, REGISTER_FAIL } from "./action_types";
+import {
+    USER_LOADED,
+    USER_LOADING,
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT_SUCESS,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL,
+} from "./action_types";
 import { AddAlert } from "./AlertAction";
 
 //Load user if token is there
@@ -72,16 +81,23 @@ export const login = ({ email, password }) => (dispatch) => {
 //Register user
 export const register = (data) => (dispatch) => {
     //header
-    const config = {
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
+    console.log(data);
+    var formdata = new FormData();
+
+    formdata.append("email", data.email);
+    formdata.append("password", data.password);
+    formdata.append("username", data.username);
+    formdata.append("avatar", data.file);
+    formdata.append("bio", data.bio);
+    formdata.append("confirm_password", data.confirm_password);
+
+    var config = {
+        method: "post",
+        url: "/api/v1/users/register",
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formdata,
     };
-
-    const body = qs.stringify(data);
-
-    axios
-        .post("/api/v1/users/register", body, config)
+    axios(config)
         .then((res) => {
             dispatch({
                 type: REGISTER_SUCCESS,
