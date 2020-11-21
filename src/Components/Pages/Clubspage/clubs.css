@@ -1,0 +1,88 @@
+.club .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 600px) {
+    .club .header {
+        flex-direction: column;
+    }
+}
+.club .leftside {
+    width: 450px;
+    vertical-align: center;
+}
+.club .imageholder {
+    box-sizing: border-box;
+    padding: 5px 5px 5px 5px;
+    width: 90%;
+    height: 90%;
+}
+.club .imageholder img {
+    height: 100%;
+    width: 100%;
+    border-radius: 1.5rem;
+}
+.club .rightside {
+    width: 450px;
+    border-radius: 1.5rem;
+    box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+    border: 2px solid red;
+}
+.club .viewscreen {
+    width: 90%;
+    max-height: 0px;
+    transition: max-height 1s ease-out;
+    margin: auto;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.club .viewscreen[show="1"] {
+    width: 90%;
+    max-height: 800px;
+}
+.club .descriptionholder {
+    box-sizing: border-box;
+    background-color: #777;
+    color: white;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    min-width: 400px;
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
+        0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.club .descriptionholder:hover {
+    background-color: #555;
+}
+.club .row {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+.club .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 300px;
+    padding: 5px 5px 5px 5px;
+    margin: 10px 10px 10px 10px;
+}
+.club .card img {
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+}
+.club .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.club .line-break {
+    width: 100%;
+}
