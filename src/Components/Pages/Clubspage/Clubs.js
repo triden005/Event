@@ -86,7 +86,7 @@ class Clubs extends React.Component {
                     <div className="row">
                         {event &&
                             event.map((eventid) => {
-                                console.log(this.props.events.get(eventid));
+                                // console.log(this.props.events.get(eventid));
                                 var ev = this.props.events.get(eventid);
                                 return (
                                     ev && (
@@ -99,7 +99,7 @@ class Clubs extends React.Component {
                                                 onClick={this.onclick.bind(this, ev._id)}
                                             >
                                                 <div>
-                                                    {console.log(ev.eimage)}
+                                                    {/* {console.log(ev.eimage)} */}
                                                     {ev.eimage ? (
                                                         <img src={ev.eimage} alt="eimage" />
                                                     ) : (
