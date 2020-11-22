@@ -33,19 +33,10 @@ class Home extends React.Component {
     e.preventDefault();
   };
   render() {
-    // let discription =
-    //   props.discription + "\n\n---\n<center>time-table here</center>";
-    // props.discription = discription;
     return (
       <div className="home">
         <div className="leftside">
           {[...this.props.events.values()].map((ev) => {
-            let discription = ev.discription + "\n\n--- \n" + ev.schedule;
-            ev.discription = discription;
-
-            if (ev.eimage && ev.eimage.charAt(0) != "h") {
-              ev.eimage = `http://localhost:8000${ev.eimage}`;
-            }
             if (ev.eventName.indexOf(this.state.value) != -1)
               return <Wrapper key={ev._id} {...ev} />;
           })}
