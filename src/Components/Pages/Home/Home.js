@@ -43,7 +43,7 @@ class Home extends React.Component {
             let discription = ev.discription + "\n\n--- \n" + ev.schedule;
             ev.discription = discription;
 
-            if (ev.eimage) {
+            if (ev.eimage && ev.eimage.charAt(0) != "h") {
               ev.eimage = `http://localhost:8000${ev.eimage}`;
             }
             if (ev.eventName.indexOf(this.state.value) != -1)
@@ -51,9 +51,11 @@ class Home extends React.Component {
           })}
         </div>
         <div className="rightside">
-          <form onSubmit={this.submit}>
-            <input onChange={this.change}></input>
-            <button type="submit">search</button>
+          <form class="home-right-form" onSubmit={this.submit}>
+            <input class="search-field" onChange={this.change}></input>
+            <button class="submit-button" type="submit">
+              search
+            </button>
           </form>
         </div>
       </div>
