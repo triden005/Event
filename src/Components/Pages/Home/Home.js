@@ -33,27 +33,20 @@ class Home extends React.Component {
         e.preventDefault();
     };
     render() {
-        // let discription =
-        //   props.discription + "\n\n---\n<center>time-table here</center>";
-        // props.discription = discription;
         return (
             <div className="home">
                 <div className="leftside">
                     {[...this.props.events.values()].map((ev) => {
-                        let discription = ev.discription + "\n\n--- \n" + ev.schedule;
-                        ev.discription = discription;
-
-                        // if (ev.eimage) {
-                        //     ev.eimage = `http://localhost:8000${ev.eimage}`;
-                        // }
                         if (ev.eventName.indexOf(this.state.value) != -1)
                             return <Wrapper key={ev._id} {...ev} />;
                     })}
                 </div>
                 <div className="rightside">
-                    <form onSubmit={this.submit}>
-                        <input onChange={this.change}></input>
-                        <button type="submit">search</button>
+                    <form class="home-right-form" onSubmit={this.submit}>
+                        <input class="search-field" onChange={this.change}></input>
+                        <button class="submit-button" type="submit">
+                            search
+                        </button>
                     </form>
                 </div>
             </div>
