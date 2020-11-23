@@ -45,7 +45,7 @@
 }
 .club .descriptionholder {
     box-sizing: border-box;
-    background-color: #777;
+    background-color: #555;
     color: white;
     padding: 18px;
     width: 100%;
@@ -56,9 +56,11 @@
     border-radius: 6px;
     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
         0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
 }
 .club .descriptionholder:hover {
-    background-color: #555;
+    background-color: #777;
 }
 .club .row {
     width: 80%;
@@ -85,4 +87,63 @@
 }
 .club .line-break {
     width: 100%;
+}
+
+/* admin css rules*/
+.club .buttonholder {
+    text-align: right;
+}
+.club textarea {
+    background-color: #555;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0px;
+    font-size: 15px;
+    height: 100%;
+}
+.club input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    min-width: 100px;
+    height: 2rem;
+}
+.club input:hover[type="submit"] {
+    box-shadow: 0 2px 4px rgba(27, 169, 76, 0.4);
+}
+.club input[type="file"] {
+    border: 0px solid red;
+    text-align: right;
+    width: 80%;
+}
+.club input:focus {
+    border: 0px;
+}
+.club input::-webkit-file-upload-button {
+    background-color: #4caf50;
+    color: white;
+    width: 20%;
+    min-width: 100px;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    height: 2rem;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    font-size: 0.9rem;
+}
+
+.wrap {
+    color: #dfd5cb;
+    margin: auto;
+    background: white;
+    width: 100%;
+    height: 290px;
+    font-size: 200px;
+    text-align: center;
 }

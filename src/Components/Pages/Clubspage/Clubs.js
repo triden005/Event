@@ -1,9 +1,15 @@
 import React from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import Markdown from "react-markdown";
+import gfm from "remark-gfm";
+
 import { AddAlert } from "../../../_action/AlertAction";
 import { Wrapper } from "../Home/Home";
+
 import "../Home/home.css";
-import { connect } from "react-redux";
 import "./clubs.css";
+
 import noImage from "../Home/no-image.jpg";
 
 class Clubs extends React.Component {
@@ -13,6 +19,8 @@ class Clubs extends React.Component {
             user: {},
             event: {},
             show: -1,
+            admin: false,
+            edit: false,
         };
         //for scrolling to the view reference
         this.view = React.createRef();
@@ -21,6 +29,7 @@ class Clubs extends React.Component {
     componentDidMount() {
         //to get username from the url named id
         const id = this.props.match.params.id;
+
         //users list from redux state
         const list = [...this.props.users.values()];
         // console.log(list);                   //debug line
@@ -36,6 +45,10 @@ class Clubs extends React.Component {
             this.props.history.push("/");
         } else {
             this.setState({ user });
+            if (this.props.user) {
+                var { _id } = this.props.user;
+                if (_id === user._id) this.setState({ admin: true });
+            }
         }
     }
     //function to display the event clicked from the array
@@ -52,9 +65,56 @@ class Clubs extends React.Component {
             }, 1000);
         } else this.setState({ event: ev, show: -this.state.show });
     };
+
+    handelchange = (e) => {
+        this.setState({ user: { ...this.state.user, [e.target.name]: e.target.value } });
+    };
+    onFileChange = (e) => {
+        this.setState({
+            user: {
+                ...this.state.user,
+                avatar: URL.createObjectURL(e.target.files[0]),
+                file: e.target.files[0],
+            },
+        });
+    };
+    handelsubmit = (e) => {
+        if (!this.state.edit) {
+            this.setState({ edit: true });
+        } else {
+            //for dev
+            this.setState({ edit: false });
+
+            //after backend created
+            const { bio, email, _id, username, file } = this.state.user;
+            var formdata = new FormData();
+            formdata.append("id", _id);
+            formdata.append("email", email);
+            formdata.append("username", username);
+            formdata.append("avatar", file);
+            formdata.append("bio", bio);
+            var config = {
+                method: "post",
+                url: "/api/v1/users/update",
+                headers: { "Content-Type": "multipart/form-data" },
+                data: formdata,
+            };
+            axios(config)
+                .then((res) => {
+                    //add success message
+                    AddAlert({ message: res.data.message }, "success");
+                    //change button text
+                    this.setState({ edit: false });
+                })
+                .catch((err) => {
+                    AddAlert(err.response.data, "warning");
+                });
+        }
+    };
     render() {
+        const { admin, edit } = this.state;
         //getting fields from user
-        const { username, bio, createdAt, event, email, avatar } = this.state.user;
+        const { username, bio, event, avatar, email } = this.state.user;
         //getting event from state to display
         const ev = this.state.event;
         return (
@@ -69,37 +129,70 @@ class Clubs extends React.Component {
                                 <img src={noImage} alt="No Image" />
                             )}
 
-                            <div className="contactholder">Contact-{email}</div>
+                            <div className="buttonholder">
+                                {edit && <input type="file" onChange={this.onFileChange} />}
+                            </div>
                         </div>
                     </div>
                     <div className="rightsize">
-                        <div className="descriptionholder">{bio}</div>
+                        <div className="descriptionholder">
+                            {edit ? (
+                                <textarea
+                                    value={bio}
+                                    name="bio"
+                                    onChange={this.handelchange}
+                                ></textarea>
+                            ) : (
+                                <div>
+                                    <Markdown allowDangerousHtml plugins={[gfm]} source={bio} />
+                                </div>
+                            )}
+                        </div>
+                        {admin ? (
+                            <div className="righttext">
+                                <input
+                                    type="submit"
+                                    onClick={this.handelsubmit}
+                                    value={edit ? "Save" : "Edit"}
+                                    className="edit-button"
+                                />
+                            </div>
+                        ) : null}
                     </div>
                 </div>
                 <div className="events">
-                    <h2 className="center">Recent Events</h2>
-                    <div className="viewscreen" ref={this.view} show={this.state.show}>
+                    <h2 className="center" ref={this.view}>
+                        Recent Events
+                        <hr color="white" width="60%" />
+                    </h2>
+                    <div className="viewscreen" show={this.state.show}>
                         <div style={{ height: "100%", marginBottom: "20px" }}>
                             {<Wrapper {...ev} />}
-                        </div>{" "}
+                        </div>
+                        {admin && (
+                            <div className="center">
+                                <input
+                                    type="submit"
+                                    onclick={() => this.props.history.push("/editevent/" + ev._id)}
+                                    value="Edit"
+                                    className=" edit-button"
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="row">
                         {event &&
                             event.map((eventid) => {
-                                // console.log(this.props.events.get(eventid));
                                 var ev = this.props.events.get(eventid);
                                 return (
                                     ev && (
-                                        <>
-                                            {" "}
-                                            {}
+                                        <div key={ev._id}>
                                             <div
                                                 className="card"
                                                 key={ev._id}
                                                 onClick={this.onclick.bind(this, ev._id)}
                                             >
                                                 <div>
-                                                    {/* {console.log(ev.eimage)} */}
                                                     {ev.eimage ? (
                                                         <img src={ev.eimage} alt="eimage" />
                                                     ) : (
@@ -108,10 +201,24 @@ class Clubs extends React.Component {
                                                     {ev.eventName}
                                                 </div>
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 );
                             })}
+                        {admin && (
+                            <div>
+                                <div
+                                    className="card"
+                                    key={ev._id}
+                                    onClick={() => this.props.history.push("/addevent")}
+                                >
+                                    <div className="wrap">
+                                        <i className="fa fa-plus" />
+                                    </div>
+                                    <div className="center">CreateNew</div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -122,6 +229,7 @@ class Clubs extends React.Component {
 const mapstatetoprops = (state) => ({
     users: state.data.users,
     events: state.data.events,
+    user: state.auth.user,
 });
 
 export default connect(mapstatetoprops, { AddAlert })(Clubs);

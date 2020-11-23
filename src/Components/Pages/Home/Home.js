@@ -37,7 +37,9 @@ class Home extends React.Component {
             <div className="home">
                 <div className="leftside">
                     {[...this.props.events.values()].map((ev) => {
-                        if (ev.eventName.indexOf(this.state.value) != -1)
+                        if (
+                            ev.eventName.toLowerCase().indexOf(this.state.value.toLowerCase()) != -1
+                        )
                             return <Wrapper key={ev._id} {...ev} />;
                     })}
                 </div>
@@ -48,6 +50,21 @@ class Home extends React.Component {
                             search
                         </button>
                     </form>
+                    <div className="rightrow">
+                        <div> Users</div>
+                        {[...this.props.users.values()].map((user) => {
+                            return (
+                                <div
+                                    className="userarray"
+                                    onClick={() =>
+                                        this.props.history.push("/user/" + user.username)
+                                    }
+                                >
+                                    {user.username}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         );
