@@ -54,7 +54,8 @@ class Clubs extends React.Component {
     //function to display the event clicked from the array
     onclick = (id) => {
         //first scrolling to the event div
-        this.view.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (this.state.show === -1)
+            this.view.current.scrollIntoView({ behavior: "smooth", block: "start" });
         //getting event from event dictionary from redux
         var ev = this.props.events.get(id);
         //condition of viewing another event from event
@@ -173,7 +174,7 @@ class Clubs extends React.Component {
                             <div className="center">
                                 <input
                                     type="submit"
-                                    onclick={() => this.props.history.push("/editevent/" + ev._id)}
+                                    onClick={() => this.props.history.push("/edit/" + ev._id)}
                                     value="Edit"
                                     className=" edit-button"
                                 />

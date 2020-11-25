@@ -234,17 +234,33 @@ class AddEvent extends React.Component {
                     <div className="addevent-rightbox">
                         <div style={{ display: "flex", flexDirection: "row" }}>
                             <div className="imageholder">
-                                <img src={this.state.file} height="100px" width="100px" />
+                                <img src={this.state.eimage} height="100px" width="100px" />
                             </div>
-                            <div>
-                                <h3>{this.state.eventname}</h3>
+                            <div className="head">
+                                <h3>{this.state.eventName}</h3>
+                                <div className="venue">{this.state.venue}</div>
                                 <div>
-                                    {this.state.sdate ? `Starting On :${this.state.sdate}` : null}{" "}
-                                    {this.state.stime ? `at :${this.state.stime}` : null}
-                                    {this.state.sdate || this.state.stime ? <br /> : null}
-                                    {this.state.sdate ? `Ends On :${this.state.edate}` : null}{" "}
-                                    {this.state.etime ? `at ${this.state.etime}` : null}
-                                    {this.state.sdate || this.state.etime ? <br /> : null}
+                                    <div className="discsmall">
+                                        <div>
+                                            {this.state.eventDate
+                                                ? `${this.state.eventDate}`
+                                                : null}
+                                        </div>
+                                        <div>
+                                            {this.state.startTime
+                                                ? `Starts :${this.state.startTime}`
+                                                : null}
+                                        </div>
+                                        <div>
+                                            {this.state.endTime
+                                                ? `Ends :${this.state.endTime}`
+                                                : null}
+                                        </div>
+                                        {this.state.startTime || this.state.eventDate ? (
+                                            <br />
+                                        ) : null}
+                                    </div>
+                                    <div>{this.state.shortDiscription}</div>
                                 </div>
                             </div>
                         </div>

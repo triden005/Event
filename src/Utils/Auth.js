@@ -15,13 +15,14 @@ export default function Auth(Component, type) {
             if (isLoading !== true) {
                 if (type === 1) {
                     if (isAuthenticated === false) {
+                        props.history.goBack();
                         props.history.push("/login");
 
                         dispatch(AddAlert({ message: "Please Login to Continue" }, "systemAllert"));
                     }
                 } else if (type == 2) {
                     if (isAuthenticated === true) {
-                        props.history.push("/");
+                        props.history.goBack();
 
                         dispatch(AddAlert({ message: "Already Logged in" }, "systemAllert"));
                     }

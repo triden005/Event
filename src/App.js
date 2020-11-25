@@ -16,6 +16,7 @@ import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 import Club from "./Components/Pages/Clubspage/Clubs";
+import Editevent from "./Components/Pages/Editevent";
 import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
 import { AlertModel } from "./Components/Alert/AlertModel";
@@ -45,6 +46,8 @@ class App extends React.Component {
                             <Route exact path="/register" component={Auth(Register, 2)} />
 
                             <Route exact path="/user/:id" component={Club} />
+                            <Route exact path="/edit/:id" component={Auth(Editevent, 1)} />
+
                             <Route path="/" component={Home} />
                         </Switch>
                         {<Redirect to="/" />}

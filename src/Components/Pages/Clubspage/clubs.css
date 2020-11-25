@@ -3,9 +3,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: row;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .club .header {
         flex-direction: column;
     }
@@ -23,6 +24,8 @@
 .club .imageholder img {
     height: 100%;
     width: 100%;
+    min-width: 300px;
+    max-height: 400px;
     border-radius: 1.5rem;
 }
 .club .rightside {
@@ -68,7 +71,7 @@
     display: flex;
     flex-flow: row wrap;
     align-content: space-between;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .club .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
