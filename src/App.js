@@ -17,6 +17,7 @@ import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 import Club from "./Components/Pages/Clubspage/Clubs";
 import Editevent from "./Components/Pages/Editevent";
+import Chatbox from "./Components/Pages/chatbox/Chatbox";
 import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
 import { AlertModel } from "./Components/Alert/AlertModel";
@@ -39,7 +40,7 @@ class App extends React.Component {
 
                             <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
 
-                            <Route exact path="/posters" component={Auth(Poster, 0)} />
+                            <Route exact path="/posters" component={Auth(Chatbox, 0)} />
 
                             <Route exact path="/login" component={Auth(Login, 2)} />
 

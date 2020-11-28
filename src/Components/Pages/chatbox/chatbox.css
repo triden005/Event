@@ -1,0 +1,80 @@
+.chatbox {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.chats {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px auto;
+}
+.chatbox .content {
+    display: flex;
+    flex-direction: column;
+}
+.chatbox .avatar img {
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    border: 0.2px solid black;
+}
+.chatbox .avatar {
+    margin: auto 10px;
+}
+.createdby {
+    color: #3684f4;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.chatbox .createdat {
+    color: #adc3d0;
+    font-size: 14px;
+}
+.chatbox .upvote {
+    color: #4c6ef5;
+    margin: auto 10px;
+    font-size: 20px;
+}
+.chatbox .downvote {
+    color: #4c6ef5;
+    margin: auto 10px;
+    font-size: 20px;
+}
+.chatbox .votebox {
+    margin: auto;
+    margin-right: 30px;
+}
+
+.chatbox textarea {
+    background: rgb(244, 247, 249) none repeat scroll 0% 0%;
+    border: medium none;
+    resize: none;
+    padding: 15px;
+    border-radius: 10px;
+    outline: currentcolor none medium;
+    box-sizing: border-box;
+}
+.chatbox .commentfooter {
+    margin: auto;
+    width: calc(100% - 45px);
+    margin-bottom: 10px;
+}
+.chatbox input[type="submit"] {
+    display: inline-block;
+    padding: 0.85em 1em;
+    font-family: inherit;
+    border: medium none;
+    border-radius: 0.5em;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    outline: currentcolor none medium;
+    transition: background 0.2s ease 0s, color 0.2s ease 0s;
+    background: rgb(0, 136, 255);
+    color: rgb(255, 255, 255);
+}
+.chatbox input :hover {
+    background: rgb(12, 121, 218);
+}
