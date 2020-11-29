@@ -2,6 +2,10 @@
     width: 100%;
     height: 100%;
     background-color: white;
+    border-radius: 1rem;
+    max-height: 500px;
+    scroll-behavior: auto;
+    overflow: auto;
 }
 .chats {
     display: flex;

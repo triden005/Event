@@ -1,7 +1,8 @@
 /* The alert message box */
 .alertmodel {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
+    margin-top: 3rem;
     width: 100%;
 }
 .alertmodel .alert {

@@ -24,42 +24,26 @@ class Chatbox extends Component {
     };
     state = {
         rerender: 1,
-        parent: "5fbcfe102117871ec46d4933",
         isloading: false,
-        isauthenticated: true,
+        isauthenticated: false,
         comments: [
             {
-                avatar: noImage,
-                text: "this is comment 1",
-                upvotes: [5, 2],
-                downvotes: [1],
-                createdAt: "27.11.2021",
-                author: "bhavesh",
-            },
-            {
-                avatar: noImage,
-                text: "this is comment 1",
-                upvotes: [4, 5, 7],
+                imageurl: noImage,
+                text: "No comments yet!!!",
+                upvotes: [1, 2, 3, 4, 5],
                 downvotes: [],
-                createdAt: "27.11.2021",
-                author: "Satyam",
+                createdAt: "2020-11-27T15:27:19.650Z",
+                author: "Admin",
             },
         ],
-        nocomment: {
-            avatar: noImage,
-            text: "No comments yet!!!",
-            upvotes: 0,
-            downvotes: 0,
-            createdAt: null,
-            author: "Admin",
-        },
     };
     componentDidMount() {
+        this.setState({ parent: this.props.parent });
         let data = qs.stringify({
-            parent: "5fbcfe102117871ec46d4933",
+            parent: this.props.parent,
         });
         let config = {
-            method: "get",
+            method: "post",
             url: "/api/v1/comment/fetch/",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -76,10 +60,10 @@ class Chatbox extends Component {
     componentDidUpdate() {
         if (this.state.rerender !== 1) {
             let data = qs.stringify({
-                parent: "5fbcfe102117871ec46d4933",
+                parent: this.props.parent,
             });
             let config = {
-                method: "get",
+                method: "post",
                 url: "/api/v1/comment/fetch/",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -101,7 +85,10 @@ class Chatbox extends Component {
     }
     handelsuccess = (res) => {
         console.log(res);
-        this.setState({ tokenId: res.tokenId });
+        this.setState({ tokenId: res.tokenId, isauthenticated: true });
+    };
+    handelfailure = (res) => {
+        this.setState({ tokenId: "", isauthenticated: false });
     };
     sentcomment = () => {
         console.log("sending");
@@ -120,12 +107,10 @@ class Chatbox extends Component {
         };
         axios(config)
             .then((res) => {
-                alert("success");
                 this.props.AddAlert(res.data, "success");
                 this.setState({ rerender: -1, text: "" });
             })
             .catch((error) => {
-                alert("failed");
                 this.props.AddAlert(error.response.data, "danger");
             });
     };
@@ -168,11 +153,11 @@ class Chatbox extends Component {
 
         axios(config)
             .then((res) => {
-                this.props.AddAlert(res.data, "success");
+                this.props.dispatch(AddAlert(res.data, "success"));
                 this.setState({ rerender: -1 });
             })
             .catch((error) => {
-                this.props.AddAlert(error.response.data, "danger");
+                this.props.dispatch(AddAlert(error.response.data, "danger"));
             });
     };
     render() {
@@ -201,27 +186,56 @@ class Chatbox extends Component {
                 </div>
             );
         });
+        const nocomment = (
+            <div className="chats">
+                <div className="avatar">
+                    <img src={noImage} />
+                </div>
+                <div className="content">
+                    <div className="header">
+                        <span className="createdby">Admin</span>
+                        <span className="createdat">27.11.2020</span>
+                    </div>
+                    <div className="text">No comments yet!!!</div>
+                </div>
+                <div className="votebox">
+                    <span className="upvote">
+                        <i class="fas fa-arrow-up" />
+                    </span>
+                    <span>{5}</span>
+                    <span className="downvote">
+                        <i class="fas fa-arrow-down" />
+                    </span>
+                </div>
+            </div>
+        );
         return (
             <div className="chatbox">
-                {comment}
+                {this.state.comments.length > 0 ? comment : nocomment}
                 <div className="commentfooter ">
                     <textarea
                         value={this.state.text}
                         onChange={(e) => this.setState({ text: e.target.value })}
                     />
-                    <input type="submit" value="Comment" onClick={this.sentcomment} />
-                    <GoogleLogin
-                        clientId=""
-                        buttonText="Login & Comment"
-                        onSuccess={this.handelsuccess}
-                        onFailure={null}
-                        cookiePolicy={"single_host_origin"}
-                    />
+                    {this.state.isauthenticated ? (
+                        <input type="submit" value="Comment" onClick={this.sentcomment} />
+                    ) : (
+                        <GoogleLogin
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            buttonText="Login & Comment"
+                            onSuccess={this.handelsuccess}
+                            onFailure={this.handelfailure}
+                            cookiePolicy={"single_host_origin"}
+                        />
+                    )}
                 </div>
             </div>
         );
     }
 }
 const mapStateToProps = (state) => {};
+const mapDispatchToProps = (dispatch) => ({
+    dispatch: dispatch,
+});
 
-export default connect(mapStateToProps, { AddAlert })(Chatbox);
+export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);
