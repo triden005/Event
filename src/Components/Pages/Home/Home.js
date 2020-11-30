@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axois from "axios";
 import "./home.css";
 
 import Markdown from "react-markdown";
@@ -17,6 +16,10 @@ class Home extends React.Component {
     };
     componentDidMount() {
         this.props.loaddata();
+        this.top.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
     }
     constructor(props) {
         super(props);
@@ -126,9 +129,7 @@ function Wrapper(props) {
                         <div className="event-name">
                             <h3>{props.eventName}</h3>
                         </div>
-                        <div className="venue">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-                        </div>
+                        <div className="venue">{props.venue}</div>
                         <div className="date-time">
                             <div className="event-date">
                                 {props.eventDate ? `${props.eventDate}` : null}
@@ -180,9 +181,7 @@ function Wrapper(props) {
                     <div className="event-name">
                         <h3>{props.eventName}</h3>
                     </div>
-                    <div className="venue">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis
-                    </div>
+                    <div className="venue">{props.venue}</div>
                     <div className="date-time">
                         <div className="event-date">
                             {props.eventDate ? `${props.eventDate}` : null}

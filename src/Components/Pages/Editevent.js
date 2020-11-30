@@ -4,16 +4,20 @@ import gfm from "remark-gfm";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { AddAlert } from "../../_action/AlertAction";
-
+import { logout } from "../../_action/AuthAction";
+import axios from "axios";
+import { setauthtoken } from "../../Utils/setauthtoken";
 class Editevent extends Component {
     static propTypes = {
         user: PropTypes.object.isRequired,
         events: PropTypes.object,
     };
     state = {};
+    top = React.createRef();
     componentDidMount(props) {
         const id = this.props.match.params.id;
         const event = this.props.events.get(id);
+        this.top.current.scrollIntoView({ behavior: "smooth", block: "start" });
         if (!event) {
             this.props.history.goBack();
             this.props.AddAlert({ message: "No event found" }, "danger");
@@ -35,10 +39,65 @@ class Editevent extends Component {
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
-    delete = () => {};
+    save = (e) => {
+        e.preventDefault();
+        var formdata = new FormData();
+        formdata.append("eimage", this.state.filesend);
+        formdata.append("eventName", this.state.eventName);
+        formdata.append("eventDate", this.state.eventDate);
+        formdata.append("startTime", this.state.startTime);
+        formdata.append("discription", this.state.discription);
+        formdata.append("shortDiscription", this.state.shortDiscription);
+        formdata.append("venue", this.state.venue);
+        setauthtoken();
+        var config = {
+            method: "post",
+            url: "/api/v1/event/edit/" + this.state._id,
+            headers: { "Content-Type": "multipart/form-data" },
+
+            data: formdata,
+        };
+        axios(config)
+            .then((response) => {
+                if (response.status === 200) {
+                    // console.log("hello world");
+                    this.props.AddAlert({ message: response.data.message }, "success");
+                }
+
+                this.props.history.push("/");
+                console.log(response);
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    this.props.AddAlert(error.response.data, "danger");
+                    this.props.logout();
+                }
+            });
+    };
+    delete = () => {
+        var config = {
+            method: "post",
+            url: "/api/v1/event/destroy/" + this.state._id,
+            headers: { "Content-Type": "multipart/form-data" },
+        };
+        setauthtoken();
+        axios(config)
+            .then((response) => {
+                if (response.status === 200) {
+                    this.props.AddAlert({ message: response.data.message }, "success");
+                }
+                this.props.history.goBack();
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    this.props.AddAlert(error.response.data, "danger");
+                    this.props.logout();
+                }
+            });
+    };
     render() {
         return (
-            <div className="addevent">
+            <div className="addevent" ref={this.top}>
                 <div className="addevent-left">
                     <div className="addevent-leftbox">
                         <div className="header">
@@ -180,7 +239,7 @@ class Editevent extends Component {
                                     style={{ display: "flex", justifyContent: "space-around" }}
                                 >
                                     <input type="button" value="Delete" onClick={this.delete} />
-                                    <input type="submit" value="Save" />
+                                    <input type="submit" value="Save" onClick={this.save} />
                                 </div>
                             </form>
                         </div>
@@ -239,4 +298,4 @@ const mapStateToProps = (state) => ({
     user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { AddAlert })(Editevent);
+export default connect(mapStateToProps, { logout, AddAlert })(Editevent);

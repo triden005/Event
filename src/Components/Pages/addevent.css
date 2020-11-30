@@ -170,6 +170,17 @@
     box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
     font-size: 0.9rem;
 }
+input[type="file"]::file-selector-button {
+    background-color: #4caf50;
+    color: white;
+    width: 20%;
+    min-width: 100px;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    height: 2rem;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    font-size: 0.9rem;
+}
 .addevent-leftbox .submitbutton {
     /* max-width: 500px; */
     text-align: end;

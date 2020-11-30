@@ -33,26 +33,24 @@ class App extends React.Component {
                 <Router>
                     <Navbar />
                     <AlertModel />
-                    <div>
-                        <Switch>
-                            {/* Auth second param 0-for public 1-for only login 2-for only not login */}
-                            <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
+                    <Switch>
+                        {/* Auth second param 0-for public 1-for only login 2-for only not login */}
+                        <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
 
-                            <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
+                        <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
 
-                            <Route exact path="/posters" component={Auth(Chatbox, 0)} />
+                        <Route exact path="/posters" component={Auth(Chatbox, 0)} />
 
-                            <Route exact path="/login" component={Auth(Login, 2)} />
+                        <Route exact path="/login" component={Auth(Login, 2)} />
 
-                            <Route exact path="/register" component={Auth(Register, 2)} />
+                        <Route exact path="/register" component={Auth(Register, 2)} />
 
-                            <Route exact path="/user/:id" component={Club} />
-                            <Route exact path="/edit/:id" component={Auth(Editevent, 1)} />
+                        <Route exact path="/user/:id" component={Club} />
+                        <Route exact path="/edit/:id" component={Auth(Editevent, 1)} />
 
-                            <Route path="/" component={Home} />
-                        </Switch>
-                        {<Redirect to="/" />}
-                    </div>
+                        <Route path="/" component={Home} />
+                    </Switch>
+                    {<Redirect to="/" />}
                 </Router>
                 {/* <Error /> */}
             </Provider>

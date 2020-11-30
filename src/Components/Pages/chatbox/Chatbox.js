@@ -112,6 +112,7 @@ class Chatbox extends Component {
             })
             .catch((error) => {
                 this.props.AddAlert(error.response.data, "danger");
+                // console.log(error);
             });
     };
     upvote = (_id) => {
@@ -222,7 +223,7 @@ class Chatbox extends Component {
                     ) : (
                         <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                            buttonText="Login & Comment"
+                            buttonText="Comment with google"
                             onSuccess={this.handelsuccess}
                             onFailure={this.handelfailure}
                             cookiePolicy={"single_host_origin"}
@@ -236,6 +237,7 @@ class Chatbox extends Component {
 const mapStateToProps = (state) => {};
 const mapDispatchToProps = (dispatch) => ({
     dispatch: dispatch,
+    AddAlert,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);

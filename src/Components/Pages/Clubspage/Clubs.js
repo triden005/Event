@@ -160,6 +160,7 @@ class Clubs extends React.Component {
                             </div>
                         ) : null}
                     </div>
+                    <div className="changepassowrd"></div>
                 </div>
                 <div className="events">
                     <h2 className="center" ref={this.view}>
@@ -193,7 +194,7 @@ class Clubs extends React.Component {
                                                 key={ev._id}
                                                 onClick={this.onclick.bind(this, ev._id)}
                                             >
-                                                <div>
+                                                <div className="carddiv">
                                                     {ev.eimage ? (
                                                         <img src={ev.eimage} alt="eimage" />
                                                     ) : (
@@ -234,3 +235,38 @@ const mapstatetoprops = (state) => ({
 });
 
 export default connect(mapstatetoprops, { AddAlert })(Clubs);
+
+function changepassowrd() {
+    <div className="div1-login">
+        <div className="login">
+            <h2 class="login-text">Login</h2>
+            <form onSubmit={this.onSubmit}>
+                <div className="left">
+                    <label htmlFor="name"> Name </label>
+                </div>
+                <input
+                    type="text"
+                    name="username"
+                    value={props.username}
+                    required
+                    onChange={props.handelchange}
+                />
+                <br />
+                <div className="left">
+                    <label htmlFor="password">Password</label>
+                </div>
+                <input
+                    type="password"
+                    name="password"
+                    onChange={props.handelchange}
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    value={props.password}
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    required
+                />
+
+                <input type="submit" value="Submit" class="submit-button" />
+            </form>
+        </div>
+    </div>;
+}
