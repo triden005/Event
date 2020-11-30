@@ -9,7 +9,7 @@ import { Wrapper } from "../Home/Home";
 
 import "../Home/home.css";
 import "./clubs.css";
-
+import { setauthtoken } from "../../../Utils/setauthtoken";
 import noImage from "../Home/no-image.jpg";
 
 class Clubs extends React.Component {
@@ -21,6 +21,7 @@ class Clubs extends React.Component {
             show: -1,
             admin: false,
             edit: false,
+            changepassword: false,
         };
         //for scrolling to the view reference
         this.view = React.createRef();
@@ -80,40 +81,49 @@ class Clubs extends React.Component {
         });
     };
     handelsubmit = (e) => {
+        e.preventDefault();
         if (!this.state.edit) {
             this.setState({ edit: true });
         } else {
-            //for dev
-            this.setState({ edit: false });
-
             //after backend created
             const { bio, email, _id, username, file } = this.state.user;
             var formdata = new FormData();
             formdata.append("id", _id);
             formdata.append("email", email);
             formdata.append("username", username);
-            formdata.append("avatar", file);
             formdata.append("bio", bio);
+            if (this.state.user.changepassword) {
+                const { confirmNewPassword, newPassword, oldPassword } = this.state.user;
+                formdata.append("confirmNewPassword", confirmNewPassword);
+                formdata.append("newPassword", newPassword);
+                formdata.append("oldPassword", oldPassword);
+            }
+            if (this.state.user.file) formdata.append("avatar", file);
+            setauthtoken();
             var config = {
                 method: "post",
-                url: "/api/v1/users/update",
+                url: "/api/v1/users/edit/" + _id,
                 headers: { "Content-Type": "multipart/form-data" },
                 data: formdata,
             };
             axios(config)
                 .then((res) => {
                     //add success message
-                    AddAlert({ message: res.data.message }, "success");
+                    this.props.AddAlert({ message: res.data.message }, "success");
                     //change button text
-                    this.setState({ edit: false });
+                    this.setState({ edit: false, changepassword: false });
                 })
-                .catch((err) => {
-                    AddAlert(err.response.data, "warning");
+                .catch((error) => {
+                    if (error.response.status === 401) {
+                        this.props.AddAlert(error.response.data, "danger");
+                        this.props.logout();
+                    }
+                    console.log(error.response);
                 });
         }
     };
     render() {
-        const { admin, edit } = this.state;
+        const { admin, edit, changepassword } = this.state;
         //getting fields from user
         const { username, bio, event, avatar, email } = this.state.user;
         //getting event from state to display
@@ -121,47 +131,79 @@ class Clubs extends React.Component {
         return (
             <div className="club">
                 <h1 className="center">{username}</h1>
-                <div className="header">
-                    <div className="leftside">
-                        <div className="imageholder">
-                            {avatar ? (
-                                <img src={avatar} alt="avatar" />
-                            ) : (
-                                <img src={noImage} alt="No Image" />
-                            )}
+                <form onSubmit={this.handelsubmit}>
+                    <div className="head">
+                        <div className="leftside">
+                            <div className="imageholder">
+                                {avatar ? (
+                                    <img src={avatar} alt="avatar" />
+                                ) : (
+                                    <img src={noImage} alt="No Image" />
+                                )}
 
-                            <div className="buttonholder">
-                                {edit && <input type="file" onChange={this.onFileChange} />}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="rightsize">
-                        <div className="descriptionholder">
-                            {edit ? (
-                                <textarea
-                                    value={bio}
-                                    name="bio"
-                                    onChange={this.handelchange}
-                                ></textarea>
-                            ) : (
-                                <div>
-                                    <Markdown allowDangerousHtml plugins={[gfm]} source={bio} />
+                                <div className="buttonholder">
+                                    {edit && <input type="file" onChange={this.onFileChange} />}
                                 </div>
-                            )}
-                        </div>
-                        {admin ? (
-                            <div className="righttext">
-                                <input
-                                    type="submit"
-                                    onClick={this.handelsubmit}
-                                    value={edit ? "Save" : "Edit"}
-                                    className="edit-button"
-                                />
                             </div>
-                        ) : null}
+                        </div>
+                        <div className="rightsize">
+                            <div className="rightside2">
+                                <div className="descriptionholder">
+                                    {edit ? (
+                                        <textarea
+                                            value={bio}
+                                            name="bio"
+                                            onChange={this.handelchange}
+                                        ></textarea>
+                                    ) : (
+                                        <div>
+                                            <Markdown
+                                                allowDangerousHtml
+                                                plugins={[gfm]}
+                                                source={bio}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className={changepassword ? "passwordblock" : "displaynone"}>
+                                    {changepassword && (
+                                        <Changepassword
+                                            handelchange={this.handelchange}
+                                            confirmNewPassword={this.state.confirmNewPassword}
+                                            newPassword={this.state.newPassword}
+                                            oldPassword={this.props.oldPassword}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+
+                            {admin ? (
+                                <>
+                                    <div className="righttext">
+                                        {edit && (
+                                            <input
+                                                type="button"
+                                                value="ChangePassword"
+                                                onClick={() => {
+                                                    this.setState({
+                                                        changepassword: !changepassword,
+                                                    });
+                                                }}
+                                            />
+                                        )}
+
+                                        <input
+                                            type="submit"
+                                            value={edit ? "Save" : "Edit"}
+                                            className="edit-button"
+                                        />
+                                    </div>
+                                </>
+                            ) : null}
+                        </div>
                     </div>
-                    <div className="changepassowrd"></div>
-                </div>
+                </form>
+
                 <div className="events">
                     <h2 className="center" ref={this.view}>
                         Recent Events
@@ -169,7 +211,11 @@ class Clubs extends React.Component {
                     </h2>
                     <div className="viewscreen" show={this.state.show}>
                         <div style={{ height: "100%", marginBottom: "20px" }}>
-                            {<Wrapper {...ev} />}
+                            {
+                                <div className="home">
+                                    <Wrapper {...ev} />
+                                </div>
+                            }
                         </div>
                         {admin && (
                             <div className="center">
@@ -236,37 +282,49 @@ const mapstatetoprops = (state) => ({
 
 export default connect(mapstatetoprops, { AddAlert })(Clubs);
 
-function changepassowrd() {
-    <div className="div1-login">
-        <div className="login">
-            <h2 class="login-text">Login</h2>
-            <form onSubmit={this.onSubmit}>
-                <div className="left">
-                    <label htmlFor="name"> Name </label>
+function Changepassword(props) {
+    return (
+        <div style={{ height: "100%", width: "100%" }}>
+            <div className="div1-login">
+                <div className="login">
+                    <h2 class="login-text">ChangePassword</h2>
+                    <div className="left">
+                        <label htmlFor="name"> Old Password </label>
+                    </div>
+                    <input
+                        type="password"
+                        name="oldPassword"
+                        value={props.oldPassword}
+                        onChange={props.handelchange}
+                        required="true"
+                    />
+                    <br />
+                    <div className="left">
+                        <label htmlFor="password">New Password</label>
+                    </div>
+                    <input
+                        type="password"
+                        name="newPassword"
+                        onChange={props.handelchange}
+                        // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        value={props.newPassword}
+                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                        required="true"
+                    />
+                    <div className="left">
+                        <label htmlFor="confirmNewPassword">ConfirmNewPassword</label>
+                    </div>
+                    <input
+                        type="password"
+                        name="confirmNewPassword"
+                        onChange={props.handelchange}
+                        // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        value={props.confirmNewPassword}
+                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                        required="true"
+                    />
                 </div>
-                <input
-                    type="text"
-                    name="username"
-                    value={props.username}
-                    required
-                    onChange={props.handelchange}
-                />
-                <br />
-                <div className="left">
-                    <label htmlFor="password">Password</label>
-                </div>
-                <input
-                    type="password"
-                    name="password"
-                    onChange={props.handelchange}
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    value={props.password}
-                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                    required
-                />
-
-                <input type="submit" value="Submit" class="submit-button" />
-            </form>
+            </div>
         </div>
-    </div>;
+    );
 }

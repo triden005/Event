@@ -94,7 +94,7 @@
     flex-direction: row;
 }
 
-.leftside {
+.home .leftside {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,13 +102,13 @@
     width: 80vw;
 }
 
-.wrapper {
+.home .wrapper {
     display: flex;
     flex-wrap: wrap;
     width: 92%;
     margin: auto;
 }
-.time-table {
+.home .time-table {
     width: 18%;
     /* margin: auto; */
     /* margin-top: 3rem; */
@@ -127,7 +127,7 @@
     margin-top: 3rem;
     transition: 1s ease-in-out;
 }
-.wrapper-small {
+.home .wrapper-small {
     margin: auto;
     margin-top: 3rem;
     margin-bottom: 0;
@@ -144,7 +144,7 @@
     min-width: 280px;
     transition: 1s ease-in-out;
 }
-.image-small {
+.home .image-small {
     height: 100%;
     width: 33%;
     /* min-width: 200px; */
@@ -188,13 +188,13 @@
     font-style: italic;
     font-size: 1.2rem;
 }
-.event-date {
+.wrapper-small .event-date {
     min-width: 30px;
 }
-.start-time {
+.wrapper-small .start-time {
     min-width: 30px;
 }
-.end-time {
+.wrapper-small .end-time {
     min-width: 30px;
 }
 .wrapper-large .event-date {
@@ -224,7 +224,7 @@
 }
 
 /* styles for large tiles */
-.wrapper-large {
+.home .wrapper-large {
     margin: auto;
     margin-top: 3rem;
     margin-bottom: 0;
@@ -308,7 +308,7 @@
     width: 100%;
     margin: auto;
 }
-.rightside {
+.home .rightside {
     /* margin-top: 3rem; */
     height: 100%;
     width: 300px;
@@ -352,7 +352,7 @@
     border: 0px solid #ccc;
     box-shadow: 0 3px 6px rgba(27, 169, 76, 0.5);
 }
-.home-right-form {
+.home .home-right-form {
     display: flex;
     margin: auto;
     width: 80%;
@@ -360,7 +360,7 @@
     flex-direction: row-reverse;
     flex-wrap: wrap;
 }
-.togglebutton1 {
+.home .togglebutton1 {
     cursor: pointer;
     right: 0;
     top: 3rem;
@@ -373,7 +373,7 @@
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
 }
-.togglebutton2 {
+.home .togglebutton2 {
     cursor: pointer;
     position: absolute;
     font-size: 2rem;
@@ -385,12 +385,12 @@
     top: 3rem;
     left: 0px;
 }
-.rightrow {
+.home .rightrow {
     margin: auto;
     margin-top: 30px;
     text-align: center;
 }
-.userarray {
+.home .userarray {
     border-radius: 2px;
     width: 60%;
     cursor: pointer;
@@ -405,20 +405,20 @@
     border-radius: 4px;
     box-sizing: border-box;
 }
-.visible {
+.home .visible {
     width: 310px;
 }
-.hidden {
+.home .hidden {
     width: 0px;
 }
 @media screen and (max-width: 1400px) {
-    .visible {
+    .home .visible {
         width: 0px;
     }
-    .hidden {
+    .home .hidden {
         width: 300px;
     }
-    .leftside {
+    .home .leftside {
         width: 100vw;
     }
 }
@@ -426,25 +426,6 @@
     .home .header {
         flex-direction: column;
         display: block;
-    }
-}
-@media screen and (max-width: 1150px) {
-    /* .leftside {
-        width: 100%;
-    } */
-    .time-table {
-        display: none;
-    }
-}
-@media screen and (max-width: 900px) {
-    .wrapper-small {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .image-small img {
-        max-height: 50%;
     }
     .wrapper-large {
         /* flex-direction: column; */
@@ -458,7 +439,37 @@
         width: 100%;
     }
 }
-.tablink {
+@media screen and (max-width: 1150px) {
+    /* .leftside {
+        width: 100%;
+    } */
+    .home .time-table {
+        display: none;
+    }
+}
+@media screen and (max-width: 900px) {
+    .home .wrapper-small {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .image-small img {
+        max-height: 50%;
+    }
+    /* .wrapper-large {
+        flex-direction: column;
+        width: 90%;
+    }
+    .wrapper-large .image-large {
+        width: 100%;
+        height: 50vmin;
+    }
+    .wrapper-large .discription-large {
+        width: 100%;
+    } */
+}
+.home .tablink {
     /* background-color: #555; */
     /* color: white;
     color: black;
@@ -480,7 +491,7 @@
     border: 0px solid #ccc;
     box-shadow: 0 3px 6px rgba(27, 169, 76, 0.5);
 }
-.contentbox {
+.home .contentbox {
     height: 500px;
     overflow-y: scroll;
 }
