@@ -3,6 +3,7 @@ import { DATA_LOADED, DATA_LOADING } from "../_action/action_types";
 const initialState = {
     users: [],
     events: [],
+    polls:[],
     isLoading: null,
 };
 
@@ -18,6 +19,7 @@ export default function DataReducer(state = initialState, action) {
                 ...state,
                 users: action.payload.users,
                 events: action.payload.events,
+                polls:action.payload.polls,
                 isLoading: false,
             };
         default:
