@@ -364,13 +364,13 @@
 }
 .home .togglebutton1 {
   cursor: pointer;
-  right: 0;
-  top: 3rem;
+  height: 20px;
   position: fixed;
+  top: 50px;
+  right: 30px;
   font-size: 2rem;
   z-index: 1;
-  /* background-color: #393e46; */
-  color: white;
+  color: black;
   padding: 3px;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
@@ -380,7 +380,7 @@
   position: absolute;
   font-size: 2rem;
   /* background-color: #393e46; */
-  color: white;
+  color: black;
   padding: 3px;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
@@ -398,7 +398,7 @@
   cursor: pointer;
   text-align: center;
   padding: 2px 2px 2px 2px;
-  background: white;
+  background: #222831;
   margin: 6px auto;
   min-width: 200px;
   padding: 12px;
@@ -406,6 +406,11 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  color: white;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.25rem;
+  overflow: hidden;
 }
 .home .visible {
   width: 310px;
@@ -413,6 +418,9 @@
 .home .hidden {
   width: 0px;
 }
+
+/* media queries */
+
 @media screen and (max-width: 1400px) {
   .home .visible {
     width: 0px;
