@@ -162,9 +162,16 @@ class AddEvent extends React.Component {
                                             onChange={this.handelchange}
                                             id="time"
                                             required
+                                            
                                         />
+                                         
                                     </div>
+                                    
                                 </div>
+
+                                       
+ 
+            
                                 <div>
                                     <label htmlFor="short-discription">Short Discription</label>
                                 </div>

@@ -10,6 +10,7 @@ import { loadUser } from "./_action/AuthAction";
 
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Pages/Home/Home";
+import AddPoll from "./Components/Pages/addPoll/addpoll";
 import EventCalander from "./Components/Pages/Eventcalender";
 import Poster from "./Components/Pages/Poster";
 import Login from "./Components/Auth/Login";
@@ -37,6 +38,8 @@ class App extends React.Component {
                             <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
 
                             <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
+
+                            <Route exact path="/addpoll" component={Auth(AddPoll, 1)} />
 
                             <Route exact path="/posters" component={Auth(Poster, 0)} />
 

@@ -43,6 +43,9 @@ class Navbar extends React.Component {
                         <Link to="/eventcalander">
                             <i className="fa fa-fw fa-calendar-plus" /> Calendar
                         </Link>
+                        <Link to="/addpoll">
+                            <i className="fa fa-fw fa-plus-square" /> AddPoll
+                        </Link>
                         <Link to="/posters">Poster</Link>
                     </span>
 
@@ -57,6 +60,9 @@ class Navbar extends React.Component {
 
                             <Link to="/eventcalander">
                                 <i className="fa fa-fw fa-calendar-plus" /> Calendar
+                            </Link>
+                            <Link to="/addpoll">
+                                <i className="fa fa-fw fa-plus-square" /> AddPoll
                             </Link>
                             <Link to="/posters">Poster</Link>
                             {isAuthenticated ? userlogin : guest}
