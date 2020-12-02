@@ -12,6 +12,8 @@ import {
     LOGOUT_SUCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    SET_IDTOKEN,
+    CLEAR_IDTOKEN,
 } from "./action_types";
 import { AddAlert } from "./AlertAction";
 
@@ -120,4 +122,16 @@ export const logout = () => (dispatch) => {
     dispatch({
         type: LOGOUT_SUCESS,
     });
+};
+//
+export const gauth = (idtoken) => {
+    return {
+        type: SET_IDTOKEN,
+        payload: idtoken,
+    };
+};
+export const gauthclear = () => {
+    return {
+        type: CLEAR_IDTOKEN,
+    };
 };

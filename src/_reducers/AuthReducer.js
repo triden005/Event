@@ -1,10 +1,23 @@
-import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGOUT_SUCESS, LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS } from "../_action/action_types";
+import {
+    USER_LOADED,
+    USER_LOADING,
+    AUTH_ERROR,
+    LOGOUT_SUCESS,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    REGISTER_FAIL,
+    REGISTER_SUCCESS,
+    CLEAR_IDTOKEN,
+    SET_IDTOKEN,
+} from "../_action/action_types";
 
 const initialState = {
     token: localStorage.getItem("Token"),
     isAuthenticated: null,
     isLoading: false,
     user: null,
+    tokenid: null,
+    gauthenticated: false,
 };
 
 export default function AuthReducer(state = initialState, action) {
@@ -27,7 +40,6 @@ export default function AuthReducer(state = initialState, action) {
             return {
                 ...state,
                 token: action.payload,
-                // isAuthenticated: true,
                 isLoading: false,
             };
         case LOGIN_FAIL:
@@ -41,6 +53,18 @@ export default function AuthReducer(state = initialState, action) {
                 user: null,
                 isAuthenticated: false,
                 isLoading: false,
+            };
+        case SET_IDTOKEN:
+            return {
+                ...state,
+                tokenid: action.payload,
+                gauthenticated: true,
+            };
+        case CLEAR_IDTOKEN:
+            return {
+                ...state,
+                tokenid: null,
+                gauthenticated: false,
             };
         default:
             return state;

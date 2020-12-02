@@ -19,4 +19,5 @@ export const DATA_LOADING = "DATA_LOADING";
 export const DATA_LOADED = "DATA_LOADED";
 
 //development
-// export const CLEAR_ERROR = "CLEAR_ERROR";
+export const SET_IDTOKEN = "SET_IDTOKEN";
+export const CLEAR_IDTOKEN = "CLEAR_IDTOKEN";
