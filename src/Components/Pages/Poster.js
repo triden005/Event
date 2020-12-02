@@ -32,7 +32,7 @@ class Poster extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{ marginTop: "3rem" }}>
                 <h1>demo: react-infinite-scroll-component</h1>
                 {/* <hr />
                 <InfiniteScroll dataLength={this.state.items.length} next={this.fetchMoreData} hasMore={true} loader={<h4>Loading...</h4>}>

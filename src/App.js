@@ -17,6 +17,8 @@ import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 import Club from "./Components/Pages/Clubspage/Clubs";
+import Editevent from "./Components/Pages/Editevent";
+import Chatbox from "./Components/Pages/chatbox/Chatbox";
 import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
 import { AlertModel } from "./Components/Alert/AlertModel";
@@ -32,26 +34,26 @@ class App extends React.Component {
                 <Router>
                     <Navbar />
                     <AlertModel />
-                    <div>
-                        <Switch>
-                            {/* Auth second param 0-for public 1-for only login 2-for only not login */}
-                            <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
+                    <Switch>
+                        {/* Auth second param 0-for public 1-for only login 2-for only not login */}
+                        <Route exact path="/addevent" component={Auth(AddEvent, 1)} />
 
-                            <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
+                        <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
 
-                            <Route exact path="/addpoll" component={Auth(AddPoll, 1)} />
+                        <Route exact path="/addpoll" component={Auth(AddPoll, 1)} />
 
-                            <Route exact path="/posters" component={Auth(Poster, 0)} />
+                        <Route exact path="/posters" component={Auth(Poster, 0)} />
 
-                            <Route exact path="/login" component={Auth(Login, 2)} />
+                        <Route exact path="/login" component={Auth(Login, 2)} />
 
-                            <Route exact path="/register" component={Auth(Register, 2)} />
+                        <Route exact path="/register" component={Auth(Register, 2)} />
 
-                            <Route exact path="/user/:id" component={Club} />
-                            <Route path="/" component={Home} />
-                        </Switch>
-                        {<Redirect to="/" />}
-                    </div>
+                        <Route exact path="/user/:id" component={Club} />
+                        <Route exact path="/edit/:id" component={Auth(Editevent, 1)} />
+
+                        <Route path="/" component={Home} />
+                    </Switch>
+                    {<Redirect to="/" />}
                 </Router>
                 {/* <Error /> */}
             </Provider>

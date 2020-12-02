@@ -47,6 +47,7 @@ class AddEvent extends React.Component {
         formdata.append("schedule", this.state.schedule);
         formdata.append("event_name", this.state.eventname);
         formdata.append("start_date", this.state.sdate);
+        formdata.append("venue", this.state.venue);
         setauthtoken();
         var config = {
             method: "post",
@@ -243,15 +244,23 @@ class AddEvent extends React.Component {
                             <div className="imageholder">
                                 <img src={this.state.file} height="100px" width="100px" />
                             </div>
-                            <div>
+                            <div className="head">
                                 <h3>{this.state.eventname}</h3>
+                                <div className="venue">{this.state.venue}</div>
                                 <div>
-                                    {this.state.sdate ? `Starting On :${this.state.sdate}` : null}{" "}
-                                    {this.state.stime ? `at :${this.state.stime}` : null}
-                                    {this.state.sdate || this.state.stime ? <br /> : null}
-                                    {this.state.sdate ? `Ends On :${this.state.edate}` : null}{" "}
-                                    {this.state.etime ? `at ${this.state.etime}` : null}
-                                    {this.state.sdate || this.state.etime ? <br /> : null}
+                                    <div className="discsmall">
+                                        <div>{this.state.sdate ? `${this.state.sdate}` : null}</div>
+                                        <div>
+                                            {this.state.stime
+                                                ? `Starts :${this.state.stime}`
+                                                : null}
+                                        </div>
+                                        <div>
+                                            {this.state.etime ? `Ends :${this.state.etime}` : null}
+                                        </div>
+                                        {this.state.stime || this.state.sdate ? <br /> : null}
+                                    </div>
+                                    <div>{this.state.sdiscription}</div>
                                 </div>
                             </div>
                         </div>
