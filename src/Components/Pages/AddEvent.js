@@ -120,7 +120,7 @@ class AddEvent extends React.Component {
                                 <div className="formdate">
                                     <div>
                                         <div>
-                                            <label htmlFor="date">StartDate</label>
+                                            <label htmlFor="date">Start Date</label>
                                         </div>
                                         <input
                                             type="date"
@@ -137,7 +137,7 @@ class AddEvent extends React.Component {
                                 <div className="Time">
                                     <div>
                                         <div>
-                                            <label htmlFor="duration">StartTime</label>
+                                            <label htmlFor="duration">Start Time</label>
                                         </div>
                                         <input
                                             type="time"
@@ -153,7 +153,7 @@ class AddEvent extends React.Component {
                                     <span style={{ width: "3px" }} />
                                     <div>
                                         <div>
-                                            <label htmlFor="duration">EndTime</label>
+                                            <label htmlFor="duration">End Time</label>
                                         </div>
                                         <input
                                             type="time"
@@ -163,16 +163,9 @@ class AddEvent extends React.Component {
                                             onChange={this.handelchange}
                                             id="time"
                                             required
-                                            
                                         />
-                                         
                                     </div>
-                                    
                                 </div>
-
-                                       
- 
-            
                                 <div>
                                     <label htmlFor="short-discription">Short Discription</label>
                                 </div>

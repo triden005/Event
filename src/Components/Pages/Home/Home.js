@@ -11,33 +11,28 @@ import noImage from "./no-image.jpg";
 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
 
-var grammar = '#JSGF V1.0;'
+var grammar = "#JSGF V1.0;";
 
 var recognition = new SpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
-recognition.lang = 'en-US';
+recognition.lang = "en-US";
 recognition.interimResults = false;
-var micValue='';
-recognition.onresult = function(event) {
+var micValue = "";
+recognition.onresult = function (event) {
     var last = event.results.length - 1;
     var command = event.results[last][0].transcript;
-// console.log(command);
-micValue=command;
-window.change2();
-     
+    // console.log(command);
+    micValue = command;
+    window.change2();
 };
- recognition.onspeechend = function() {
+recognition.onspeechend = function () {
     recognition.stop();
     window.change2();
-    
 };
 
 class Home extends React.Component {
-
-  
-    
     state = {};
     top = React.createRef();
     handelchange = (e) => {
@@ -52,9 +47,9 @@ class Home extends React.Component {
     }
     constructor(props) {
         super(props);
-        window.change2= this.change2.bind(this);
+        window.change2 = this.change2.bind(this);
         this.state = {
-            value:'',
+            value: "",
             toggle: true,
         };
     }
@@ -63,21 +58,22 @@ class Home extends React.Component {
         const input = e.target.value;
         this.setState({ value: e.target.value });
     };
+    submit = (e) => {
+        e.preventDefault();
+    };
     change2 = (e) => {
         this.setState({ value: micValue });
         document.getElementById("myBtn").disabled = false;
-        
     };
-    submit= (e) => {
+    submit = (e) => {
         e.preventDefault();
     };
-     
-    micButton= (e)=>
-    {
+
+    micButton = (e) => {
         e.preventDefault();
-    recognition.start();    
-    document.getElementById("myBtn").disabled = true;
-}
+        recognition.start();
+        document.getElementById("myBtn").disabled = true;
+    };
     render() {
         const visible = {
             width: "300px",
@@ -85,7 +81,7 @@ class Home extends React.Component {
         const hidden = {
             width: "0px",
         };
-        
+
         return (
             <div className="home" ref={this.top}>
                 <div className="leftside">
@@ -97,13 +93,10 @@ class Home extends React.Component {
                     })}
                 </div>
                 <div
-                    className="togglebutton1"
-                    onClick={() => {
-                        this.setState({ toggle: !this.state.toggle });
-                        this.top.current.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }}
+                    className="userarray"
+                    onClick={() => this.props.history.push("/user/" + user.username)}
                 >
-                    <i class="fas fa-bars" />
+                    {user.username}
                 </div>
                 <div
                     className="rightside"
@@ -121,19 +114,26 @@ class Home extends React.Component {
                     >
                         <i class="fas fa-times" />
                     </div>
-                   
+
                     <form class="home-right-form" onSubmit={this.submit}>
-                        <input class="search-field" value={this.state.value} onChange={this.change}></input>
-                        <button class="submit-button" type="submit" >
+                        <input
+                            class="search-field"
+                            value={this.state.value}
+                            onChange={this.change}
+                        ></input>
+                        <button class="submit-button" type="submit">
                             search
                         </button>
-                      
-                        <button  type="submit" title="speak event name" id="myBtn"  onClick = {this.micButton}>
+
+                        <button
+                            type="submit"
+                            title="speak event name"
+                            id="myBtn"
+                            onClick={this.micButton}
+                        >
                             mic
                         </button>
-                        <div>
-
-    </div>
+                        <div></div>
                     </form>
                     <div className="rightrow">
                         <div> Users</div>
