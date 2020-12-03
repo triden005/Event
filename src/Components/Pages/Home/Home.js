@@ -8,7 +8,36 @@ import { connect, useSelector } from "react-redux";
 import Chatbox from "../chatbox/Chatbox";
 import noImage from "./no-image.jpg";
 
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
+
+var grammar = '#JSGF V1.0;'
+
+var recognition = new SpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+var micValue='';
+recognition.onresult = function(event) {
+    var last = event.results.length - 1;
+    var command = event.results[last][0].transcript;
+// console.log(command);
+micValue=command;
+window.change2();
+     
+};
+ recognition.onspeechend = function() {
+    recognition.stop();
+    window.change2();
+    
+};
+
 class Home extends React.Component {
+
+  
+    
     state = {};
     top = React.createRef();
     handelchange = (e) => {
@@ -23,8 +52,9 @@ class Home extends React.Component {
     }
     constructor(props) {
         super(props);
+        window.change2= this.change2.bind(this);
         this.state = {
-            value: "",
+            value:'',
             toggle: true,
         };
     }
@@ -33,9 +63,21 @@ class Home extends React.Component {
         const input = e.target.value;
         this.setState({ value: e.target.value });
     };
-    submit = (e) => {
+    change2 = (e) => {
+        this.setState({ value: micValue });
+        document.getElementById("myBtn").disabled = false;
+        
+    };
+    submit= (e) => {
         e.preventDefault();
     };
+     
+    micButton= (e)=>
+    {
+        e.preventDefault();
+    recognition.start();    
+    document.getElementById("myBtn").disabled = true;
+}
     render() {
         const visible = {
             width: "300px",
@@ -43,6 +85,7 @@ class Home extends React.Component {
         const hidden = {
             width: "0px",
         };
+        
         return (
             <div className="home" ref={this.top}>
                 <div className="leftside">
@@ -78,11 +121,19 @@ class Home extends React.Component {
                     >
                         <i class="fas fa-times" />
                     </div>
+                   
                     <form class="home-right-form" onSubmit={this.submit}>
-                        <input class="search-field" onChange={this.change}></input>
-                        <button class="submit-button" type="submit">
+                        <input class="search-field" value={this.state.value} onChange={this.change}></input>
+                        <button class="submit-button" type="submit" >
                             search
                         </button>
+                      
+                        <button  type="submit" title="speak event name" id="myBtn"  onClick = {this.micButton}>
+                            mic
+                        </button>
+                        <div>
+
+    </div>
                     </form>
                     <div className="rightrow">
                         <div> Users</div>
