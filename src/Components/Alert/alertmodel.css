@@ -1,9 +1,11 @@
 /* The alert message box */
 .alertmodel {
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 10;
     margin-top: 3rem;
     width: 100%;
+    top: 0;
+    right: 0;
 }
 .alertmodel .alert {
     padding: 20px;

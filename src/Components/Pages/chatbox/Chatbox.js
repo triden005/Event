@@ -7,6 +7,7 @@ import noImage from "../Home/no-image.jpg";
 import "./chatbox.css";
 import { GoogleLogin } from "react-google-login";
 import { AddAlert } from "../../../_action/AlertAction";
+import { gauth, gauthclear } from "../../../_action/AuthAction";
 function formatDate(date) {
     var d = new Date(date),
         month = "" + (d.getMonth() + 1),
@@ -38,6 +39,9 @@ class Chatbox extends Component {
         ],
     };
     componentDidMount() {
+        if (this.props.gauthenticated) {
+            this.setState({ isauthenticated: true, tokenId: this.props.tokenId });
+        }
         this.setState({ parent: this.props.parent });
         let data = qs.stringify({
             parent: this.props.parent,
@@ -84,11 +88,14 @@ class Chatbox extends Component {
         }
     }
     handelsuccess = (res) => {
-        console.log(res);
+        // console.log(res);
         this.setState({ tokenId: res.tokenId, isauthenticated: true });
+        this.props.gauth(this.state.tokenId);
     };
     handelfailure = (res) => {
+        console.log(res);
         this.setState({ tokenId: "", isauthenticated: false });
+        this.props.AddAlert({ message: "Something went wrong" }, "info");
     };
     sentcomment = () => {
         console.log("sending");
@@ -111,8 +118,9 @@ class Chatbox extends Component {
                 this.setState({ rerender: -1, text: "" });
             })
             .catch((error) => {
-                this.props.AddAlert(error.response.data, "danger");
-                // console.log(error);
+                if (error.response) this.props.AddAlert(error.response.data, "danger");
+                this.props.gauthclear();
+                this.setState({ isauthenticated: false, tokenId: null });
             });
     };
     upvote = (_id) => {
@@ -135,10 +143,13 @@ class Chatbox extends Component {
                 this.setState({ rerender: -1 });
             })
             .catch((error) => {
-                this.props.AddAlert(error.response.data, "danger");
+                if (error.response) this.props.AddAlert(error.response.data, "danger");
+                this.props.gauthclear();
+                this.setState({ isauthenticated: false, tokenId: null });
             });
     };
     downvote = (_id) => {
+        console.log("yes");
         let data = qs.stringify({
             _id,
             tokenId: this.state.tokenId,
@@ -154,11 +165,14 @@ class Chatbox extends Component {
 
         axios(config)
             .then((res) => {
-                this.props.dispatch(AddAlert(res.data, "success"));
+                this.props.AddAlert(res.data, "success");
                 this.setState({ rerender: -1 });
             })
             .catch((error) => {
-                this.props.dispatch(AddAlert(error.response.data, "danger"));
+                if (error.response) this.props.AddAlert(error.response.data, "danger");
+                // console.log(error);
+                this.props.gauthclear();
+                this.setState({ isauthenticated: false, tokenId: null });
             });
     };
     render() {
@@ -234,10 +248,9 @@ class Chatbox extends Component {
         );
     }
 }
-const mapStateToProps = (state) => {};
-const mapDispatchToProps = (dispatch) => ({
-    dispatch: dispatch,
-    AddAlert,
+const mapStateToProps = (state) => ({
+    gauthenticated: state.auth.gauthenticated,
+    tokenId: state.auth.tokenid,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);
+export default connect(mapStateToProps, { AddAlert, gauth, gauthclear })(Chatbox);
