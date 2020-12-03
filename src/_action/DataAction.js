@@ -20,11 +20,15 @@ export const loaddata = () => (dispatch) => {
             var poll = res.data.data.poll;
             user.map((us) => usermap.set(us._id, us));
             event.map((eve) => eventmap.set(eve._id, eve));
-            poll.map((p)=> {pollmap.set(p._id,p);})
-            dispatch({ type: DATA_LOADED, payload: { users: usermap, events: eventmap ,polls : pollmap} });
+            if (poll) poll.map((p) => pollmap.set(p._id, p));
+            dispatch({
+                type: DATA_LOADED,
+                payload: { users: usermap, events: eventmap, polls: pollmap },
+            });
         })
         .catch((err) => {
-            if (err.response) dispatch(AddAlert("Something Went Wrong", err.response.status));
+            if (err.response)
+                dispatch(AddAlert({ message: "Something Went Wrong" }, err.response.status));
             console.log(err);
         });
 };

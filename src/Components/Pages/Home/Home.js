@@ -8,12 +8,12 @@ import { connect, useSelector } from "react-redux";
 import Chatbox from "../chatbox/Chatbox";
 import noImage from "./no-image.jpg";
 
-var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var webkitSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
 
 var grammar = "#JSGF V1.0;";
 
-var recognition = new SpeechRecognition();
+var recognition = new webkitSpeechRecognition();
 var speechRecognitionList = new SpeechGrammarList();
 speechRecognitionList.addFromString(grammar, 1);
 recognition.grammars = speechRecognitionList;
@@ -58,9 +58,6 @@ class Home extends React.Component {
         const input = e.target.value;
         this.setState({ value: e.target.value });
     };
-    submit = (e) => {
-        e.preventDefault();
-    };
     change2 = (e) => {
         this.setState({ value: micValue });
         document.getElementById("myBtn").disabled = false;
@@ -93,10 +90,13 @@ class Home extends React.Component {
                     })}
                 </div>
                 <div
-                    className="userarray"
-                    onClick={() => this.props.history.push("/user/" + user.username)}
+                    className="togglebutton1"
+                    onClick={() => {
+                        this.setState({ toggle: !this.state.toggle });
+                        this.top.current.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }}
                 >
-                    {user.username}
+                    <i class="fas fa-bars" />
                 </div>
                 <div
                     className="rightside"
