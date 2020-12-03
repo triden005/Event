@@ -4,44 +4,58 @@ import axios from "axios";
 import qs from "querystring";
 import { connect } from "react-redux";
 import proptypes from "prop-types";
+import { AddAlert } from "../../../_action/AlertAction";
+import { GoogleLogin } from "react-google-login";
+import { gauth, gauthclear } from "../../../_action/AuthAction";
+import { Link } from "react-router-dom";
 
 class Poll extends React.Component {
-  handleVote(event, value, pollId) {
+  handleVote = (event, value, pollId) => {
     let data = qs.stringify({
       parent: pollId,
-      value: value,
+      option: value,
     });
     let config = {
-      method: "post",
-      url: "http://localhost:8000/api/v1/home",
+      method: "POST",
+      url: `/api/v1/poll/vote/`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      data: data,
+      data,
     };
     axios(config)
       .then((response) => {
         console.log(response);
+        if (response.status === 200) {
+          this.props.AddAlert({ message: response.data.message }, "success");
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
+        this.props.AddAlert({ message: error.data.message }, "danger");
       });
-  }
-
+  };
   render() {
     let { polls, user } = this.props;
     return (
-      <div className="polls">
-        {[...polls.values()].map((poll) => {
-          return (
-            <ShowPoll
-              key={poll._id}
-              poll={poll}
-              handleVote={this.handleVote}
-              user={user}
-            />
-          );
-        })}
+      <div className="show-polls">
+        <div className="polls">
+          {[...polls.values()].map((poll) => {
+            return (
+              <ShowPoll
+                key={poll._id}
+                poll={poll}
+                handleVote={this.handleVote}
+                user={user}
+              />
+            );
+          })}
+        </div>
+        <div className="add-poll">
+          <button>
+            <Link to="/addpoll">Add Poll</Link>
+          </button>
+        </div>
       </div>
     );
   }
@@ -105,6 +119,8 @@ function ShowOptions(props) {
 const mapstatetoprops = (state) => ({
   user: state.auth.user,
   polls: state.data.polls,
+  gauthenticated: state.auth.gauthenticated,
+  tokenId: state.auth.tokenid,
 });
 
-export default connect(mapstatetoprops)(Poll);
+export default connect(mapstatetoprops, { AddAlert, gauth, gauthclear })(Poll);

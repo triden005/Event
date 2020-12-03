@@ -23,6 +23,7 @@ import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 import Club from "./Components/Pages/Clubspage/Clubs";
 import Editevent from "./Components/Pages/Editevent";
+import addPoll from "./Components/Pages/Polls/addPoll";
 import Chatbox from "./Components/Pages/chatbox/Chatbox";
 import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
@@ -54,6 +55,8 @@ class App extends React.Component {
             <Route exact path="/posters" component={Auth(Poster, 0)} />
 
             <Route exact path="/login" component={Auth(Login, 2)} />
+
+            <Route exact path="/addpoll" component={Auth(addPoll, 1)} />
 
             <Route exact path="/register" component={Auth(Register, 2)} />
 
