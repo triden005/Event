@@ -4,6 +4,7 @@ import "./home.css";
 import Markdown from "react-markdown";
 import gfm from "remark-gfm";
 import { loaddata } from "../../../_action/DataAction";
+import { AddAlert } from "../../../_action/AlertAction";
 import { connect, useSelector } from "react-redux";
 import Chatbox from "../chatbox/Chatbox";
 import noImage from "./no-image.jpg";
@@ -12,25 +13,28 @@ var webkitSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRec
 var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
 
 var grammar = "#JSGF V1.0;";
+if (webkitSpeechRecognition) {
+    var recognition = new webkitSpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
 
-var recognition = new webkitSpeechRecognition();
-var speechRecognitionList = new SpeechGrammarList();
-speechRecognitionList.addFromString(grammar, 1);
-recognition.grammars = speechRecognitionList;
-recognition.lang = "en-US";
-recognition.interimResults = false;
-var micValue = "";
-recognition.onresult = function (event) {
-    var last = event.results.length - 1;
-    var command = event.results[last][0].transcript;
-    // console.log(command);
-    micValue = command;
-    window.change2();
-};
-recognition.onspeechend = function () {
-    recognition.stop();
-    window.change2();
-};
+    // var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    var micValue = "";
+    recognition.onresult = function (event) {
+        var last = event.results.length - 1;
+        var command = event.results[last][0].transcript;
+        // console.log(command);
+        micValue = command;
+        window.change2();
+    };
+    recognition.onspeechend = function () {
+        recognition.stop();
+        window.change2();
+    };
+}
 
 class Home extends React.Component {
     state = {};
@@ -68,8 +72,13 @@ class Home extends React.Component {
 
     micButton = (e) => {
         e.preventDefault();
-        recognition.start();
-        document.getElementById("myBtn").disabled = true;
+        if (recognition) {
+            recognition.start();
+            document.getElementById("myBtn").disabled = true;
+        } else {
+            this.props.AddAlert({ message: "Not supported in your browser" }, "info");
+            document.getElementById("myBtn").disabled = true;
+        }
     };
     render() {
         const visible = {
@@ -124,11 +133,12 @@ class Home extends React.Component {
                         <button class="submit-button" type="submit">
                             search
                         </button>
-
+                        <div></div>
                         <button
                             type="submit"
                             title="speak event name"
                             id="myBtn"
+                            style={{ marginRight: "5px" }}
                             onClick={this.micButton}
                         >
                             mic
@@ -141,9 +151,7 @@ class Home extends React.Component {
                             return (
                                 <div
                                     className="userarray"
-                                    onClick={() =>
-                                        this.props.history.push("/user/" + user.username)
-                                    }
+                                    onClick={() => this.props.history.push("/user/" + user._id)}
                                 >
                                     {user.username}
                                 </div>
@@ -268,4 +276,4 @@ const mapprops = (state) => ({
 });
 export { Wrapper };
 
-export default connect(mapprops, { loaddata })(Home);
+export default connect(mapprops, { loaddata, AddAlert })(Home);

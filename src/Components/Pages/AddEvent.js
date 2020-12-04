@@ -29,12 +29,18 @@ class AddEvent extends React.Component {
         sdate: formatDate(new Date()),
         edate: formatDate(new Date()),
         venue: "At Campus",
-        discription:
-            "#### <center>College Ninja is organising an event on</center>\n\n--- \n|Days| |Timing|break|\n|:----:|:-|:-----:|:--:|\n|Day1|-|5pm-7pm|4pm-6pm|\n|Day2|- |10pm-12pm|11pm-11.30pm|\n|Day3|-|8am-3pm|noBreaksorry",
+        sdiscription: "College Ninjas are organising DSA workshop!!!!",
+        schedule:
+            "|Days| |Timing|break|\n|:----:|:-|:-----:|:--:|\n|Day1|-|5pm-7pm|4pm-6pm|\n|Day2|- |10pm-12pm|11pm-11.30pm|\n|Day3|-|8am-3pm|noBreaksorry",
+        discription: "#### <center>College Ninja is organising an event on</center>\n\n",
     };
+    top = React.createRef();
     handelchange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
+    componentDidMount() {
+        this.top.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
     onSubmit = (e) => {
         e.preventDefault();
         var formdata = new FormData();
@@ -69,6 +75,7 @@ class AddEvent extends React.Component {
             .catch((error) => {
                 if (error.response.status === 401) {
                     this.props.AddAlert(error.response.data, "danger");
+                    this.props.history.push("/");
                     this.props.logout();
                 }
             });
@@ -81,7 +88,7 @@ class AddEvent extends React.Component {
     };
     render() {
         return (
-            <div className="addevent">
+            <div className="addevent" ref={this.top}>
                 <div className="addevent-left">
                     <div className="addevent-leftbox">
                         <div className="header">

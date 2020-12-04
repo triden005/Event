@@ -55,7 +55,7 @@ class Chatbox extends Component {
             data: data,
         };
         axios(config).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             this.setState({
                 comments: res.data.comment,
             });
@@ -76,7 +76,7 @@ class Chatbox extends Component {
             };
             axios(config)
                 .then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.setState({
                         comments: res.data.comment,
                         rerender: 1,
@@ -98,30 +98,34 @@ class Chatbox extends Component {
         this.props.AddAlert({ message: "Something went wrong" }, "info");
     };
     sentcomment = () => {
-        console.log("sending");
-        let data = qs.stringify({
-            parent: this.state.parent,
-            tokenId: this.state.tokenId,
-            text: this.state.text,
-        });
-        let config = {
-            method: "post",
-            url: "/api/v1/comment/create/",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            data: data,
-        };
-        axios(config)
-            .then((res) => {
-                this.props.AddAlert(res.data, "success");
-                this.setState({ rerender: -1, text: "" });
-            })
-            .catch((error) => {
-                if (error.response) this.props.AddAlert(error.response.data, "danger");
-                this.props.gauthclear();
-                this.setState({ isauthenticated: false, tokenId: null });
+        // console.log("sending");
+        if (this.state.text) {
+            let data = qs.stringify({
+                parent: this.state.parent,
+                tokenId: this.state.tokenId,
+                text: this.state.text,
             });
+            let config = {
+                method: "post",
+                url: "/api/v1/comment/create/",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                data: data,
+            };
+            axios(config)
+                .then((res) => {
+                    this.props.AddAlert(res.data, "success");
+                    this.setState({ rerender: -1, text: "" });
+                })
+                .catch((error) => {
+                    if (error.response) this.props.AddAlert(error.response.data, "danger");
+                    this.props.gauthclear();
+                    this.setState({ isauthenticated: false, tokenId: null });
+                });
+        } else {
+            this.props.AddAlert({ message: "Inalid Input" }, "info");
+        }
     };
     upvote = (_id) => {
         let data = qs.stringify({
@@ -149,7 +153,7 @@ class Chatbox extends Component {
             });
     };
     downvote = (_id) => {
-        console.log("yes");
+        // console.log("yes");
         let data = qs.stringify({
             _id,
             tokenId: this.state.tokenId,

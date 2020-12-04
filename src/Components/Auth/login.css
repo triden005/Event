@@ -65,49 +65,50 @@
 /* margin-top: 20%; */
 /* } */
 .div1-login {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100vh;
+    padding-top: 6rem;
 }
 .login {
-  background-color: #393e46;
-  color: white;
-  padding: 2.5rem;
-  min-width: 400px;
-  box-sizing: border-box;
-  margin: auto;
-  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
-  border-radius: 1rem;
+    background-color: #393e46;
+    color: white;
+    padding: 2.5rem;
+    min-width: 400px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+    border-radius: 1rem;
 }
 .login-right {
-  background-color: #00adb5;
-  color: black;
-  padding: 2.5rem;
-  margin: auto;
-  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
-  border-radius: 1rem;
+    background-color: #00adb5;
+    color: black;
+    padding: 2.5rem;
+    margin: auto;
+    box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+    border-radius: 1rem;
 }
 .login-text {
-  text-align: center;
-  margin: 0;
-  margin-bottom: 15px;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 15px;
 }
 .login input {
-  width: 100%;
-  padding: 12px;
-  justify-content: space-between;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 30px;
-  font-size: 1rem;
+    width: 100%;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 30px;
+    font-size: 1rem;
 }
 .login .submit-button {
-  background-color: #4caf50;
-  color: white;
-  border: 0px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    background-color: #4caf50;
+    color: white;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
 }

@@ -64,60 +64,61 @@
 } */
 
 .div1-register {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
 }
 .register {
-  background-color: #393e46;
-  padding: 2.5rem;
-  color: white;
-  width: 43%;
-  margin: auto;
+    background-color: #393e46;
+    padding: 2.5rem;
+    color: white;
+    width: 43%;
+    margin: auto;
 
-  margin-top: 5rem;
-  box-sizing: border-box;
-  min-width: 550px;
-  border-radius: 1rem;
-  box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
+    margin-top: 5rem;
+    box-sizing: border-box;
+    min-width: 400px;
+    border-radius: 1rem;
+    box-shadow: 3px 3px 15px 5px rgba(0, 0, 0, 0.32);
 }
 .register input,
 textarea {
-  width: 100%;
-  padding: 12px;
-  justify-content: space-between;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 30px;
-  font-size: 1rem;
+    width: 100%;
+    padding: 12px;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 30px;
+    font-size: 1rem;
 }
 .register .submit-button {
-  background-color: #4caf50;
-  color: white;
-  border: 0px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    background-color: #4caf50;
+    color: white;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
 }
 .register input::-webkit-file-upload-button {
-  background-color: #4caf50;
-  color: white;
-  min-width: 100px;
-  border: 0px solid #ccc;
-  border-radius: 6px;
-  height: 2rem;
-  box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
-  font-size: 0.9rem;
+    background-color: #4caf50;
+    color: white;
+    min-width: 100px;
+    border: 0px solid #ccc;
+    border-radius: 6px;
+    height: 2rem;
+    box-shadow: 0 3px 6px rgba(27, 169, 76, 0.4);
+    font-size: 0.9rem;
 }
 .register .have-account {
-  text-align: right;
+    text-align: right;
 }
 .register .login-link {
-  color: #51c055;
-  text-decoration: none;
+    color: #51c055;
+    text-decoration: none;
 }
 .register .login-link:hover {
-  color: #66ee6a;
-  text-decoration: underline;
+    color: #66ee6a;
+    text-decoration: underline;
 }

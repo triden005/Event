@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 import proptype from "prop-types";
 import { AddAlert } from "../../_action/AlertAction";
 import { register } from "../../_action/AuthAction";
+import noimage from "../../Components/Pages/Home/no-image.jpg";
 
 class Register extends React.Component {
     //form will have all the form data
     state = {
         form: {},
+        image: noimage,
     };
 
     //for handelling input
@@ -71,12 +73,13 @@ class Register extends React.Component {
                             <div>
                                 <label>Bio</label>
                             </div>
+
                             <textarea
                                 style={{ minHeight: "100px" }}
                                 value={this.state.form.bio}
                                 onChange={this.handelchange}
                                 type="text"
-                                placeholder="The Fame"
+                                placeholder="Tell us something about..."
                                 name="bio"
                                 required
                             />
@@ -118,9 +121,22 @@ class Register extends React.Component {
                                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                 required
                             />
-                            <img src={this.state.image} />
+                            <div>
+                                <label>Profile Image</label>
+                            </div>
+                            <img
+                                src={this.state.image}
+                                className="center"
+                                height="300px"
+                                width="300px"
+                            />
                             <input type="file" onChange={this.onFileChange} />
-                            <input type="submit" value="Register" className="submit-button" />
+                            <input
+                                type="submit"
+                                value="Register"
+                                style={{ maxWidth: "100px" }}
+                                className="submit-button"
+                            />
                             <div className="have-account">
                                 Already have an account?&nbsp;&nbsp;
                                 <Link to="./login" className="login-link">

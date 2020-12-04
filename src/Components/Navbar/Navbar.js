@@ -33,16 +33,17 @@ class Navbar extends React.Component {
                         <i className="fa fa-fw fa-home" /> Home
                     </Link>
                     <span className="tohide">
-                        <Link to="/addevent">
-                            <i className="fa fa-fw fa-plus-square" /> AddEvent
-                        </Link>
+                        {isAuthenticated && (
+                            <Link to="/addevent">
+                                <i className="fa fa-fw fa-plus-square" /> AddEvent
+                            </Link>
+                        )}
                         <Link to="/eventcalander">
                             <i className="fa fa-fw fa-calendar-plus" /> Calendar
                         </Link>
-                        <Link to="/addpoll">
+                        {/* <Link to="/addpoll">
                             <i className="fa fa-fw fa-plus-square" /> AddPoll
-                        </Link>
-                        <Link to="/posters">Poster</Link>
+                        </Link> */}
                     </span>
 
                     <div className="dropdown right">
@@ -50,17 +51,18 @@ class Navbar extends React.Component {
                             <i className="fa fa-caret-down"></i> Options
                         </button>
                         <div className="dropdown-content">
-                            <Link to="/addevent">
-                                <i className="fa fa-fw fa-plus-square" /> AddEvent
-                            </Link>
+                            {isAuthenticated && (
+                                <Link to="/addevent">
+                                    <i className="fa fa-fw fa-plus-square" /> AddEvent
+                                </Link>
+                            )}
 
                             <Link to="/eventcalander">
                                 <i className="fa fa-fw fa-calendar-plus" /> Calendar
                             </Link>
-                            <Link to="/addpoll">
+                            {/* <Link to="/addpoll">
                                 <i className="fa fa-fw fa-plus-square" /> AddPoll
-                            </Link>
-                            <Link to="/posters">Poster</Link>
+                            </Link> */}
                             {isAuthenticated ? userlogin : guest}
                             {/* <Link to="/register">
                                 <i className="fa fa-fw fa-user-plus" /> Register

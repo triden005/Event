@@ -39,15 +39,18 @@
     color: #4c6ef5;
     margin: auto 10px;
     font-size: 20px;
+    cursor: pointer;
 }
 .chatbox .downvote {
     color: #4c6ef5;
     margin: auto 10px;
     font-size: 20px;
+    cursor: pointer;
 }
 .chatbox .votebox {
     margin: auto;
     margin-right: 30px;
+    min-width: 100px;
 }
 
 .chatbox textarea {
@@ -81,4 +84,12 @@
 }
 .chatbox input :hover {
     background: rgb(12, 121, 218);
+}
+@media screen and (max-width: 700px) {
+    /* .chatbox .votebox {
+        margin: auto;
+    } */
+    .chatbox {
+        overflow-x: hidden;
+    }
 }
