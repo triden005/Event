@@ -3,6 +3,8 @@ import "./addpoll.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import proptypes from "prop-types";
+import qs from "querystring";
+import { setauthtoken } from "../../../Utils/setauthtoken";
 import { AddAlert } from "../../../_action/AlertAction";
 
 function formatDate(date) {
@@ -63,33 +65,71 @@ class AddPoll extends React.Component {
     }
   };
 
+  formatDate = (date, time) => {
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+    let formattedDate = day + "-" + month + "-" + year;
+    var dateString = formattedDate + " " + time,
+      dateTimeParts = dateString.split(" "),
+      timeParts = dateTimeParts[1].split(":"),
+      dateParts = dateTimeParts[0].split("-"),
+      timeStamp;
+
+    timeStamp = new Date(
+      dateParts[2],
+      parseInt(dateParts[1], 10) - 1,
+      dateParts[0],
+      timeParts[0],
+      timeParts[1]
+    );
+
+    return timeStamp.getTime();
+  };
+
   // submit
   Submit = (e) => {
     e.preventDefault();
-    var formdata = new FormData();
-    // // formdata.append('author',props.user._id);
-    // formdata.append("sdate", sdate);
-    // formdata.append("edate", edate);
-    // var config = {
-    //   method: "post",
-    //   url: "/api/v1/poll/create/" + props.user._id,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    //   data: formdata,
-    // };
-    // axios(config)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.status === 200) {
-    //       console.log("poll posted");
-    //     }
-    //     console.log("poll posted");
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     if (error.response.status === 401) {
-    //       console.log("poll not uploaded");
-    //     }
-    //   });
+    let start = this.formatDate(this.state.startdate, this.state.starttime);
+    let end = this.formatDate(this.state.enddate, this.state.endtime);
+    let input = {
+      start_time: start,
+      end_time: end,
+      poll_name: this.state.pollname,
+    };
+    for (var i = 1; i <= this.state.optionCount; i++) {
+      if (i == 1) {
+        input.option_1 = this.state.option1;
+      }
+      if (i == 2) {
+        input.option_2 = this.state.option2;
+      }
+      if (i == 3) {
+        input.option_3 = this.state.option3;
+      }
+      if (i == 4) {
+        input.option_4 = this.state.option4;
+      }
+    }
+    let data = qs.stringify({ ...input });
+    setauthtoken();
+    var config = {
+      method: "POST",
+      url: `/api/v1/poll/create/${this.props.user._id}`,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      data: data,
+    };
+    axios(config)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          this.props.AddAlert({ message: response.data.message }, "success");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        this.props.AddAlert({ message: error.data.message }, "danger");
+      });
   };
   render() {
     let { optionCount } = this.state;
@@ -135,6 +175,14 @@ class AddPoll extends React.Component {
                   <div>
                     <label htmlFor="polls">Poll Name</label>
                   </div>
+                  <input
+                    type="text"
+                    value={this.state.pollname}
+                    onChange={this.handelchange}
+                    name="pollname"
+                    id="polls"
+                    required
+                  />
                   <div className="options">
                     {options.map((option) => {
                       return (
@@ -166,15 +214,6 @@ class AddPoll extends React.Component {
                       <button disabled>Add Option</button>
                     )}
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Poll Name"
-                    value={this.state.pollname}
-                    onChange={this.handelchange}
-                    name="pollname"
-                    id="polls"
-                    required
-                  />
                 </div>
                 <div className="Start">
                   <div>

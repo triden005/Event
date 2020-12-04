@@ -84,7 +84,7 @@ function ShowPoll(props) {
     <div className="poll">
       <div className="poll-name">{poll.pollName}</div>
       <div className="time-details">
-        <div className="start">{poll.starttime}</div>
+        <div className="start">{poll.startTime}</div>
         <div className="end">{poll.endTime}</div>
       </div>
       <div className="options">
