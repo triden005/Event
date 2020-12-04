@@ -10,10 +10,25 @@ import { gauth, gauthclear } from "../../../_action/AuthAction";
 import { Link } from "react-router-dom";
 
 class Poll extends React.Component {
+  state = {
+    isauthenticated: false,
+  };
+  handelsuccess = (res) => {
+    // console.log(res);
+    this.setState({ tokenId: res.tokenId, isauthenticated: true });
+    this.props.gauth(this.state.tokenId);
+  };
+  handelfailure = (res) => {
+    console.log(res);
+    this.setState({ tokenId: "", isauthenticated: false });
+    this.props.AddAlert({ message: "Something went wrong" }, "info");
+  };
+
   handleVote = (event, value, pollId) => {
     let data = qs.stringify({
       parent: pollId,
       option: value,
+      tokenId: this.state.tokenId,
     });
     let config = {
       method: "POST",
@@ -36,6 +51,14 @@ class Poll extends React.Component {
       });
   };
   render() {
+    console.log(this.props);
+    let isLoggedIn = this.props.gauthenticated;
+    if (!isLoggedIn && !this.state.isauthenticated) {
+      this.props.AddAlert(
+        { message: "Please Login With Google To Vote For Polls" },
+        "danger"
+      );
+    }
     let { polls, user } = this.props;
     return (
       <div className="show-polls">
@@ -47,13 +70,38 @@ class Poll extends React.Component {
                 poll={poll}
                 handleVote={this.handleVote}
                 user={user}
+                isLoggedIn={isLoggedIn}
               />
             );
           })}
         </div>
+        <div>
+          {isLoggedIn ? (
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              buttonText="Login To Vote"
+              onSuccess={this.handelsuccess}
+              onFailure={this.handelfailure}
+              cookiePolicy={"single_host_origin"}
+              disabled
+            />
+          ) : (
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              buttonText="Login To Vote"
+              onSuccess={this.handelsuccess}
+              onFailure={this.handelfailure}
+              cookiePolicy={"single_host_origin"}
+            />
+          )}
+        </div>
         <div className="add-poll">
           <button>
-            <Link to="/addpoll">Add Poll</Link>
+            {this.props.user ? (
+              <Link to="/addpoll">Add Poll</Link>
+            ) : (
+              <Link to="/login">Add Poll</Link>
+            )}
           </button>
         </div>
       </div>
@@ -98,6 +146,7 @@ function ShowPoll(props) {
               option={option}
               pollId={poll._id}
               handleVote={props.handleVote}
+              isLoggedIn={props.isLoggedIn}
             ></ShowOptions>
           );
         })}
@@ -107,14 +156,20 @@ function ShowPoll(props) {
 }
 
 function ShowOptions(props) {
-  let { option, value, pollId, handleVote } = props;
+  let { option, value, pollId, handleVote, isLoggedIn } = props;
   return (
-    <div
-      className="option"
-      onClick={(event) => handleVote(event, value, pollId)}
-    >
-      {option}
-    </div>
+    <>
+      {isLoggedIn ? (
+        <div
+          className="option-enabled"
+          onClick={(event) => handleVote(event, value, pollId)}
+        >
+          {option}
+        </div>
+      ) : (
+        <div className="option-disabled">{option}</div>
+      )}
+    </>
   );
 }
 
