@@ -6,6 +6,7 @@ import proptypes from "prop-types";
 import qs from "querystring";
 import { setauthtoken } from "../../../Utils/setauthtoken";
 import { AddAlert } from "../../../_action/AlertAction";
+import { Redirect } from "react-router-dom";
 
 function formatDate(date) {
   var d = new Date(date),
@@ -123,10 +124,10 @@ class AddPoll extends React.Component {
     };
     axios(config)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.AddAlert({ message: response.data.message }, "success");
         }
+        this.props.history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -171,64 +172,82 @@ class AddPoll extends React.Component {
         <div className="Poll">
           <div className="addPoll">
             <div className="addpoll-box">
-              <div className="header">
-                <h2 className="title">Add Poll</h2>
-                <div className="poll-name">
-                  <div>
-                    <label htmlFor="polls">Poll Name</label>
-                  </div>
-                  <input
-                    type="text"
-                    value={this.state.pollname}
-                    onChange={this.handelchange}
-                    name="pollname"
-                    id="polls"
-                    required
-                  />
-                  <div>
-                    <label htmlFor="discription">Discription</label>
-                  </div>
-                  <textarea
-                    value={this.state.discription}
-                    placeholder="Discription"
-                    onChange={this.handelchange}
-                    name="discription"
-                    id="discription"
-                    required
-                  />
-                  <div className="options">
-                    {options.map((option) => {
-                      return (
-                        <>
-                          <div key={option.count}>
-                            <label htmlFor="option">{option.name}</label>
-                          </div>
-                          <input
-                            type="text"
-                            value={option.value}
-                            onChange={this.handelchange}
-                            name={`option${option.count}`}
-                            id="option"
-                            required
-                          />
-                        </>
-                      );
-                    })}
-                    {optionCount > 2 ? (
-                      <button onClick={this.handleDecreaseCount}>Remove</button>
-                    ) : (
-                      <button disabled>Remove</button>
-                    )}
-                    {optionCount < 4 ? (
-                      <button onClick={this.handleIncreaseCount}>
-                        Add Option
-                      </button>
-                    ) : (
-                      <button disabled>Add Option</button>
-                    )}
-                  </div>
+              <h2 className="title">Add Poll</h2>
+              <div className="poll-name">
+                <div>
+                  <label htmlFor="polls">Poll Name</label>
                 </div>
-                <div className="Start">
+                <input
+                  type="text"
+                  value={this.state.pollname}
+                  onChange={this.handelchange}
+                  name="pollname"
+                  id="polls"
+                  required
+                />
+              </div>
+              <div className="dis">
+                <div>
+                  <label htmlFor="discription">Discription</label>
+                </div>
+                <textarea
+                  value={this.state.discription}
+                  placeholder="Discription"
+                  onChange={this.handelchange}
+                  name="discription"
+                  id="discription"
+                  required
+                />
+              </div>
+
+              <div className="options">
+                {options.map((option) => {
+                  return (
+                    <>
+                      <div key={option.count}>
+                        <label htmlFor="option">{option.name}</label>
+                      </div>
+                      <input
+                        type="text"
+                        value={option.value}
+                        onChange={this.handelchange}
+                        name={`option${option.count}`}
+                        id="option"
+                        required
+                      />
+                    </>
+                  );
+                })}
+                <div className="button-cover">
+                  {optionCount > 2 ? (
+                    <button
+                      className="button"
+                      onClick={this.handleDecreaseCount}
+                    >
+                      Remove
+                    </button>
+                  ) : (
+                    <button className="button-disabled" disabled>
+                      Remove
+                    </button>
+                  )}
+                  {optionCount < 4 ? (
+                    <button
+                      className="button"
+                      onClick={this.handleIncreaseCount}
+                    >
+                      Add Option
+                    </button>
+                  ) : (
+                    <button className="button-disabled" disabled>
+                      Add Option
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="Start">
+                <div className="start-datee">
                   <div>
                     <label htmlFor="start-date">Start Date</label>
                   </div>
@@ -240,6 +259,8 @@ class AddPoll extends React.Component {
                     id="start-date"
                     required
                   />
+                </div>
+                <div className="start-timee">
                   <div>
                     <label htmlFor="start-time">Start Time</label>
                   </div>
@@ -252,7 +273,9 @@ class AddPoll extends React.Component {
                     required
                   />
                 </div>
-                <div className="End">
+              </div>
+              <div className="End">
+                <div className="end-datee">
                   <div>
                     <label htmlFor="end-date">End Date</label>
                   </div>
@@ -264,7 +287,9 @@ class AddPoll extends React.Component {
                     id="end-date"
                     required
                   />
-                  <span style={{ width: "3px" }} />
+                </div>
+
+                <div className="end-timee">
                   <div>
                     <label htmlFor="end-time">End Time</label>
                   </div>
