@@ -31,6 +31,7 @@ class AddPoll extends React.Component {
     option3: "",
     option4: "",
     optionCount: 2,
+    discription: "",
   };
   // handle input change
   handelchange = (e) => {
@@ -96,6 +97,7 @@ class AddPoll extends React.Component {
       start_time: start,
       end_time: end,
       poll_name: this.state.pollname,
+      discription: this.state.discription,
     };
     for (var i = 1; i <= this.state.optionCount; i++) {
       if (i == 1) {
@@ -183,11 +185,22 @@ class AddPoll extends React.Component {
                     id="polls"
                     required
                   />
+                  <div>
+                    <label htmlFor="discription">Discription</label>
+                  </div>
+                  <textarea
+                    value={this.state.discription}
+                    placeholder="Discription"
+                    onChange={this.handelchange}
+                    name="discription"
+                    id="discription"
+                    required
+                  />
                   <div className="options">
                     {options.map((option) => {
                       return (
                         <>
-                          <div>
+                          <div key={option.count}>
                             <label htmlFor="option">{option.name}</label>
                           </div>
                           <input

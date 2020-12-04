@@ -83,6 +83,8 @@ function ShowPoll(props) {
   return (
     <div className="poll">
       <div className="poll-name">{poll.pollName}</div>
+      <div className="creator">{poll.username}</div>
+      <div className="discription">{poll.discription}</div>
       <div className="time-details">
         <div className="start">{poll.startTime}</div>
         <div className="end">{poll.endTime}</div>
