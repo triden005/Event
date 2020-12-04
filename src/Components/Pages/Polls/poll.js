@@ -98,9 +98,13 @@ class Poll extends React.Component {
         <div className="add-poll">
           <button>
             {this.props.user ? (
-              <Link to="/addpoll">Add Poll</Link>
+              <Link to="/addpoll" className="button-link">
+                Add Poll
+              </Link>
             ) : (
-              <Link to="/login">Add Poll</Link>
+              <Link className="button-link" to="/login">
+                Add Poll
+              </Link>
             )}
           </button>
         </div>
@@ -111,7 +115,7 @@ class Poll extends React.Component {
 
 function ShowPoll(props) {
   let poll = props.poll;
-  let optionCount = Object.keys(props.poll).length - 12;
+  let optionCount = Object.keys(props.poll).length - 15;
   let options = [];
   for (var i = 1; i <= optionCount; i++) {
     if (i == 1) {
@@ -130,20 +134,25 @@ function ShowPoll(props) {
   let count = 1;
   return (
     <div className="poll">
-      <div className="poll-name">{poll.pollName}</div>
-      <div className="creator">{poll.username}</div>
+      <div className="poll-name">
+        <h2>{poll.pollName}</h2>
+        <sub>
+          <div className="creator">Created By-{poll.username}</div>
+        </sub>
+      </div>
+
       <div className="discription">{poll.discription}</div>
       <div className="time-details">
-        <div className="start">{poll.startTime}</div>
-        <div className="end">{poll.endTime}</div>
+        <div className="start">Starts At - {poll.startTime}</div>
+        <div className="end">Ends At - {poll.endTime}</div>
       </div>
       <div className="options">
-        {options.map((option) => {
+        {options.map((optionName) => {
           return (
             <ShowOptions
               key={count}
               value={count++}
-              option={option}
+              optionName={optionName}
               pollId={poll._id}
               handleVote={props.handleVote}
               isLoggedIn={props.isLoggedIn}
@@ -156,20 +165,23 @@ function ShowPoll(props) {
 }
 
 function ShowOptions(props) {
-  let { option, value, pollId, handleVote, isLoggedIn } = props;
+  let { optionName, value, pollId, handleVote, isLoggedIn } = props;
+  let option = String.fromCharCode(64 + value);
   return (
-    <>
+    <div className="option">
       {isLoggedIn ? (
         <div
           className="option-enabled"
           onClick={(event) => handleVote(event, value, pollId)}
         >
-          {option}
+          {option} : {optionName}
         </div>
       ) : (
-        <div className="option-disabled">{option}</div>
+        <div className="option-disabled">
+          {option} : {optionName}
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
