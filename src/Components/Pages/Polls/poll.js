@@ -132,6 +132,37 @@ function ShowPoll(props) {
     }
   }
   let count = 1;
+  const timeConvert = (timestamp) => {
+    var a = new Date(timestamp);
+    var months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    console.log(a);
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    if (min >= 0 && min <= 9) {
+      min = `0${min}`;
+    }
+    var time = date + " " + month + " " + year + "   " + hour + ":" + min;
+    return time;
+  };
+  let pollStart = timeConvert(Number(poll.startTime));
+  console.log(pollStart);
+  let pollEnd = timeConvert(Number(poll.endTime));
   return (
     <div className="poll">
       <div className="poll-name">
@@ -143,8 +174,8 @@ function ShowPoll(props) {
 
       <div className="discription">{poll.discription}</div>
       <div className="time-details">
-        <div className="start">Starts At - {poll.startTime}</div>
-        <div className="end">Ends At - {poll.endTime}</div>
+        <div className="start">Starts At - {pollStart}</div>
+        <div className="end">Ends At - {pollEnd}</div>
       </div>
       <div className="options">
         {options.map((optionName) => {
@@ -156,6 +187,8 @@ function ShowPoll(props) {
               pollId={poll._id}
               handleVote={props.handleVote}
               isLoggedIn={props.isLoggedIn}
+              startTime={poll.startTime}
+              endTime={poll.endTime}
             ></ShowOptions>
           );
         })}
@@ -165,11 +198,29 @@ function ShowPoll(props) {
 }
 
 function ShowOptions(props) {
-  let { optionName, value, pollId, handleVote, isLoggedIn } = props;
+  let {
+    optionName,
+    value,
+    pollId,
+    handleVote,
+    isLoggedIn,
+    startTime,
+    endTime,
+  } = props;
   let option = String.fromCharCode(64 + value);
+  let authenticatedToVote = false;
+  let currentDate = new Date();
+  let timestamp = currentDate.getTime();
+  if (isLoggedIn) {
+    if (startTime <= timestamp) {
+      if (timestamp <= endTime) {
+        authenticatedToVote = true;
+      }
+    }
+  }
   return (
     <div className="option">
-      {isLoggedIn ? (
+      {authenticatedToVote ? (
         <div
           className="option-enabled"
           onClick={(event) => handleVote(event, value, pollId)}
