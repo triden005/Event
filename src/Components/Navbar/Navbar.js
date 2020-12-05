@@ -38,11 +38,14 @@ class Navbar extends React.Component {
                                 <Link to="/addevent">
                                     <i className="fa fa-fw fa-plus-square" /> AddEvent
                                 </Link>
-                                <Link to="/poll">
-                                    <i className="fa fa-fw fa-plus-square" /> Poll
+                                <Link to="/addpoll">
+                                    <i className="fa fa-fw fa-plus-square" /> Add Poll
                                 </Link>
                             </>
                         )}
+                        <Link to="/poll">
+                            <i className="fa fa-fw fa-plus-square" /> Poll
+                        </Link>
                         <Link to="/eventcalander">
                             <i className="fa fa-fw fa-calendar-plus" /> Calendar
                         </Link>
@@ -57,17 +60,22 @@ class Navbar extends React.Component {
                         </button>
                         <div className="dropdown-content">
                             {isAuthenticated && (
-                                <Link to="/addevent">
-                                    <i className="fa fa-fw fa-plus-square" /> AddEvent
-                                </Link>
+                                <>
+                                    <Link to="/addevent">
+                                        <i className="fa fa-fw fa-plus-square" /> AddEvent
+                                    </Link>
+                                    <Link to="/addpoll">
+                                        <i className="fa fa-fw fa-plus-square" /> Add Poll
+                                    </Link>
+                                </>
                             )}
-
-                            <Link to="/eventcalander">
-                                <i className="fa fa-fw fa-calendar-plus" /> Calendar
-                            </Link>
                             <Link to="/poll">
                                 <i className="fa fa-fw fa-plus-square" /> Poll
                             </Link>
+                            <Link to="/eventcalander">
+                                <i className="fa fa-fw fa-calendar-plus" /> Calendar
+                            </Link>
+
                             {isAuthenticated ? userlogin : guest}
                         </div>
                     </div>
