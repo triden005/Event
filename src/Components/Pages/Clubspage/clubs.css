@@ -211,21 +211,6 @@
         flex-direction: column;
         display: block;
         margin: auto;
-        background: white;
-        width: 100%;
-        height: 250px;
-        font-size: 200px;
-        text-align: center;
-    }
-}
-@media screen and (max-width: 1200px) {
-    .club .leftside {
-        width: 100%;
-    }
-    .club .head {
-        flex-direction: column;
-        display: block;
-        margin: auto;
     }
     .club .imageholder {
         width: 80%;
