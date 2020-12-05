@@ -10,13 +10,16 @@ import { loadUser } from "./_action/AuthAction";
 
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Pages/Home/Home";
-import AddPoll from "./Components/Pages/addPoll/addpoll";
+import Polls from "./Components/Pages/Polls/poll";
 import EventCalander from "./Components/Pages/Eventcalender";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
 import AddEvent from "./Components/Pages/AddEvent";
 import Club from "./Components/Pages/Clubspage/Clubs";
 import Editevent from "./Components/Pages/Editevent";
+import addPoll from "./Components/Pages/Polls/addPoll";
+import Chatbox from "./Components/Pages/chatbox/Chatbox";
+import { connect } from "react-redux";
 import Auth from "./Utils/Auth";
 import { AlertModel } from "./Components/Alert/AlertModel";
 
@@ -37,9 +40,10 @@ class App extends React.Component {
 
                         <Route exact path="/eventcalander" component={Auth(EventCalander, 0)} />
 
-                        {/* <Route exact path="/addpoll" component={Auth(AddPoll, 1)} /> */}
-
+                        <Route exact path="/poll" component={Auth(Polls, 0)} />
                         <Route exact path="/login" component={Auth(Login, 2)} />
+
+                        <Route exact path="/addpoll" component={Auth(addPoll, 1)} />
 
                         <Route exact path="/register" component={Auth(Register, 2)} />
 

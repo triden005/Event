@@ -1,0 +1,99 @@
+.addPoll {
+  text-align: center;
+  max-width: 650px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: auto;
+  /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12); */
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+    0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+
+  background-color: #393e46;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 3rem;
+  font-size: 1rem;
+  position: relative;
+  top: 5rem;
+}
+
+.addPoll .addpoll-box {
+  width: 67%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.addPoll input {
+  width: 100%;
+  padding: 12px;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 30px;
+  font-size: 1rem;
+}
+.addPoll input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  width: 30%;
+  min-width: 0px;
+  max-width: 100px;
+  border: 0px solid #ccc;
+  box-shadow: 0 3px 6px rgba(27, 169, 76, 0.5);
+}
+
+.addPoll .button-cover {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.addPoll .button {
+  padding: 12px;
+  border-radius: 4px;
+  margin-right: 1rem;
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: 0px solid #ccc;
+  box-shadow: 0 3px 6px rgba(27, 169, 76, 0.5);
+  cursor: pointer;
+}
+.addPoll input:hover[type="submit"] {
+  box-shadow: 0 2px 4px rgba(27, 169, 76, 0.4);
+}
+
+.addPoll textarea {
+  height: 175px;
+}
+
+.addPoll .button-disabled {
+  padding: 12px;
+  border-radius: 4px;
+  margin-right: 1rem;
+  margin: auto;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: 0px solid #ccc;
+  color: black;
+  cursor: not-allowed;
+  background-color: #b3ffb6;
+  box-shadow: none;
+}
+
+.addPoll .Start,
+.End {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

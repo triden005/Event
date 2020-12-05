@@ -1,0 +1,104 @@
+.show-polls {
+    position: relative;
+    top: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 1.2rem;
+    padding-bottom: 3rem;
+}
+.show-polls .polls {
+    width: 65%;
+}
+
+.show-polls .poll-name h2 {
+    margin: 0;
+}
+
+.poll .creator {
+    text-align: right;
+}
+
+.show-polls .poll {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 4rem;
+    box-sizing: border-box;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+    background-color: #393e46;
+    border-radius: 16px;
+    max-height: 500px;
+    overflow: scroll;
+    box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
+        0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.show-polls .discription {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.show-polls .time-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.show-polls .options {
+    color: black;
+    margin-top: 2rem;
+}
+.show-polls .option-enabled {
+    background-color: rgba(255, 255, 255, 0.904);
+    text-transform: uppercase;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+}
+.show-polls .option-enabled:hover {
+    background-color: #4caf50;
+    color: white;
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.show-polls .option-disabled {
+    background-color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    text-align: left;
+    cursor: not-allowed;
+}
+.show-polls .add-poll .button-link {
+    text-decoration: none;
+    color: white;
+}
+
+.show-polls .add-poll button {
+    background-color: #4caf50;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 800px) {
+    .show-polls {
+        display: block;
+    }
+    .show-polls .polls {
+        width: 90%;
+        margin: auto;
+    }
+    .show-polls div {
+        margin: auto;
+    }
+}

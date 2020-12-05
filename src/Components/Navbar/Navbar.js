@@ -34,9 +34,14 @@ class Navbar extends React.Component {
                     </Link>
                     <span className="tohide">
                         {isAuthenticated && (
-                            <Link to="/addevent">
-                                <i className="fa fa-fw fa-plus-square" /> AddEvent
-                            </Link>
+                            <>
+                                <Link to="/addevent">
+                                    <i className="fa fa-fw fa-plus-square" /> AddEvent
+                                </Link>
+                                <Link to="/poll">
+                                    <i className="fa fa-fw fa-plus-square" /> Poll
+                                </Link>
+                            </>
                         )}
                         <Link to="/eventcalander">
                             <i className="fa fa-fw fa-calendar-plus" /> Calendar
@@ -60,29 +65,13 @@ class Navbar extends React.Component {
                             <Link to="/eventcalander">
                                 <i className="fa fa-fw fa-calendar-plus" /> Calendar
                             </Link>
-                            {/* <Link to="/addpoll">
-                                <i className="fa fa-fw fa-plus-square" /> AddPoll
-                            </Link> */}
-                            {isAuthenticated ? userlogin : guest}
-                            {/* <Link to="/register">
-                                <i className="fa fa-fw fa-user-plus" /> Register
+                            <Link to="/poll">
+                                <i className="fa fa-fw fa-plus-square" /> Poll
                             </Link>
-
-                            <Link to="/login">
-                                <i className="fa fa-fw fa-user" /> Login
-                            </Link> */}
+                            {isAuthenticated ? userlogin : guest}
                         </div>
                     </div>
-                    <span className="tohide">
-                        {isAuthenticated ? userlogin : guest}
-                        {/* <Link to="/register" classNameName="right">
-                            <i className="fa fa-fw fa-user-plus" /> Register
-                        </Link>
-
-                        <Link to="/login" classNameName="right">
-                            <i className="fa fa-fw fa-user" /> Login
-                        </Link> */}
-                    </span>
+                    <span className="tohide">{isAuthenticated ? userlogin : guest}</span>
                 </div>
             </nav>
         );
